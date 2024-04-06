@@ -1,0 +1,6 @@
+#menuButton {
+    -fx-background-color: rgb(64, 47, 90);
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

@@ -1,6 +1,6 @@
 package utils;
 
-import pane.GamePane;
+//import pane.GamePane;
 import pane.MenuPane;
 import pane.RootPane;
 
@@ -12,7 +12,7 @@ public class Nav {
     }
     public static void startGame() {
         clear();
-        rootPane.getChildren().add(new GamePane());
+        //rootPane.getChildren().add(new GamePane());
     }
 
     private static void clear() {

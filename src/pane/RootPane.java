@@ -9,7 +9,7 @@ public class RootPane extends StackPane {
     public static RootPane instance;
 
     public RootPane() {
-        setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
         Nav.setRootPane(this);
         Nav.homePage();
     }
