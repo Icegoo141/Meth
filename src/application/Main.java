@@ -1,16 +1,21 @@
 package application;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pane.RootPane;
+
+import java.io.IOException;
 
 public class Main extends Application {
     @Override
-    public void start(Stage stage) {
-        Scene scene = new Scene(RootPane.getRootPane(), 800, 800);
+    public void start(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scene/MainMenu.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root, 800, 800);
         stage.setScene(scene);
-        stage.setTitle("Hello");
+        stage.setTitle("Shooting Game");
         stage.show();
     }
 
