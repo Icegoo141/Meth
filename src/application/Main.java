@@ -17,7 +17,7 @@ public class Main extends Application {
         Main.stage = stage;
         stage.setTitle("Shooting Game");
         stage.setResizable(false);
-        SceneNav.setScene("MainMenu");
+        SceneNav.setFXMLScene("MainMenu.fxml");
         stage.show();
     }
 

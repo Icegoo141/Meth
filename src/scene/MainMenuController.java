@@ -16,6 +16,6 @@ public class MainMenuController {
 
     @FXML
     private void toSetting() {
-        SceneNav.setScene("SettingWindow");
+        SceneNav.setFXMLScene("SettingWindow.fxml");
     }
 }
