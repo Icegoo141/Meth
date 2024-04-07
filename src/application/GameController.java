@@ -1,7 +1,5 @@
 package application;
 
-import java.util.ArrayList;
-
 public class GameController {
     private static GameController instance;
     private int soundValue;
