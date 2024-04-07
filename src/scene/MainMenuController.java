@@ -12,7 +12,15 @@ import java.io.IOException;
 
 public class MainMenuController {
     @FXML
+    private Button credit;
+
+    @FXML
     private Button setting;
+
+    @FXML
+    private void goToCredit() {
+        SceneNav.setFXMLScene("Credit");
+    }
 
     @FXML
     private void goToSetting() {
