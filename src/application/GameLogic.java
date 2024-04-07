@@ -1,7 +1,7 @@
 package application;
 
-public class GameController {
-    private static GameController instance;
+public class GameLogic {
+    private static final GameLogic instance = new GameLogic();
     private int soundValue;
 //    private Player player;
 //    private ArrayList<BaseEnemy> ememies;
@@ -11,8 +11,7 @@ public class GameController {
 //
 //    }
 
-
-    private GameController() {
+    private GameLogic() {
         soundValue = 100;
     }
 
@@ -22,11 +21,10 @@ public class GameController {
 
     public void setSoundValue(int soundValue) {
         this.soundValue = soundValue;
+//        SoundController.setVolume(soundValue);
     }
 
-    public static GameController getInstance() {
-        if (instance == null)
-            instance = new GameController();
+    public static GameLogic getInstance() {
         return instance;
     }
 }

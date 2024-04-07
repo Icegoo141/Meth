@@ -17,7 +17,7 @@
    </ImageView>
    <Pane prefHeight="200.0" prefWidth="200.0">
       <children>
-         <Button fx:id="setting" layoutX="403.0" layoutY="359.0" mnemonicParsing="false" onAction="#toSetting"
+         <Button fx:id="setting" layoutX="403.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToSetting"
                  prefHeight="83.0" prefWidth="194.0" text="To Setting"/>
       </children>
    </Pane>

@@ -1,18 +1,14 @@
 package scene;
 
-import application.GameController;
-import application.Main;
+import application.GameLogic;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.text.Text;
 import utils.SceneNav;
 
 public class SettingWindowController {
-    private GameController gameInstance;
+    private GameLogic gameInstance;
     @FXML
     private Slider soundSlider;
 
@@ -23,21 +19,19 @@ public class SettingWindowController {
     private Button toMenuButton;
 
     public void initialize() {
-        gameInstance = GameController.getInstance();
-        int soundValue = gameInstance.getSoundValue();
-        soundSlider.setValue(soundValue);
-        soundText.setText(String.valueOf(soundValue));
+        gameInstance = GameLogic.getInstance();
+        int gameSoundValue = gameInstance.getSoundValue();
+        soundSlider.setValue(gameSoundValue);
+        soundText.setText(String.valueOf(gameSoundValue));
+        soundSlider.valueProperty().addListener(((observableValue, number, t1) -> {
+            int soundValue = t1.intValue();
+            soundText.setText(String.valueOf(soundValue));
+            gameInstance.setSoundValue(soundValue);
+        }));
     }
 
     @FXML
-    private void handleSoundSlider() {
-        int soundValue = (int) soundSlider.getValue();
-        soundText.setText(String.valueOf(soundValue));
-        gameInstance.setSoundValue(soundValue);
-    }
-
-    @FXML
-    private void backToMainMenu() {
-        SceneNav.setFXMLScene("MainMenu.fxml");
+    private void goToMainMenu() {
+        SceneNav.setFXMLScene("MainMenu");
     }
 }

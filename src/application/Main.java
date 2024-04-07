@@ -13,11 +13,11 @@ public class Main extends Application {
     private static Stage stage;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         Main.stage = stage;
         stage.setTitle("Shooting Game");
         stage.setResizable(false);
-        SceneNav.setFXMLScene("MainMenu.fxml");
+        SceneNav.setFXMLScene("SettingWindow");
         stage.show();
     }
 
