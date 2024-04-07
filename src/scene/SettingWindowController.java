@@ -1,6 +1,6 @@
 package scene;
 
-import application.GameLogic;
+import application.GameController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import utils.SceneNav;
 
 public class SettingWindowController {
-    private GameLogic gameInstance;
+    private GameController gameInstance;
     @FXML
     private Slider soundSlider;
 
@@ -19,7 +19,7 @@ public class SettingWindowController {
     private Button toMenuButton;
 
     public void initialize() {
-        gameInstance = GameLogic.getInstance();
+        gameInstance = GameController.getInstance();
         int gameSoundValue = gameInstance.getSoundValue();
         soundSlider.setValue(gameSoundValue);
         soundText.setText(String.valueOf(gameSoundValue));
