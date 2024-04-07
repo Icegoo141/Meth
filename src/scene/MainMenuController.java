@@ -15,7 +15,15 @@ public class MainMenuController {
     private Button credit;
 
     @FXML
-    private void toCredit() {
+    private Button setting;
+
+    @FXML
+    private void goToCredit() {
         SceneNav.setFXMLScene("Credit");
+    }
+
+    @FXML
+    private void goToSetting() {
+        SceneNav.setFXMLScene("SettingWindow");
     }
 }
