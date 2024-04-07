@@ -6,16 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.text.Text;
 import utils.SceneNav;
 
-import java.io.IOException;
-
-public class MainMenuController {
+public class CreditController {
     @FXML
-    private Button credit;
-
+    private Button toMenu;
     @FXML
-    private void toCredit() {
-        SceneNav.setFXMLScene("Credit");
+    private void backToMainMenu() {
+        SceneNav.setFXMLScene("MainMenu");
     }
 }
