@@ -24,20 +24,18 @@ public class SettingWindowController {
 
     public void initialize() {
         gameInstance = GameController.getInstance();
-        int soundValue = gameInstance.getSoundValue();
-        soundSlider.setValue(soundValue);
-        soundText.setText(String.valueOf(soundValue));
+        int gameSoundValue = gameInstance.getSoundValue();
+        soundSlider.setValue(gameSoundValue);
+        soundText.setText(String.valueOf(gameSoundValue));
+        soundSlider.valueProperty().addListener(((observableValue, number, t1) -> {
+            int soundValue = t1.intValue();
+            soundText.setText(String.valueOf(soundValue));
+            gameInstance.setSoundValue(soundValue);
+        }));
     }
 
     @FXML
-    private void handleSoundSlider() {
-        int soundValue = (int) soundSlider.getValue();
-        soundText.setText(String.valueOf(soundValue));
-        gameInstance.setSoundValue(soundValue);
-    }
-
-    @FXML
-    private void backToMainMenu() {
-        SceneNav.setFXMLScene("MainMenu.fxml");
+    private void goToMainMenu() {
+        SceneNav.setFXMLScene("MainMenu");
     }
 }

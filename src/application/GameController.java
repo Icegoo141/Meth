@@ -11,7 +11,6 @@ public class GameController {
 //
 //    }
 
-
     private GameController() {
         soundValue = 100;
     }
@@ -22,6 +21,7 @@ public class GameController {
 
     public void setSoundValue(int soundValue) {
         this.soundValue = soundValue;
+//        SoundController.setVolume(soundValue);
     }
 
     public static GameController getInstance() {
