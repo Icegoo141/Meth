@@ -17,7 +17,6 @@ public class GameController {
                 //draw
                 //logic
                 //objectDeletion
-                //input
                 System.out.println("hello");
             }
         };
