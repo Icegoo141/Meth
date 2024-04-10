@@ -4,6 +4,7 @@ import application.logic.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class RenderableHolder {
     private static final RenderableHolder instance = new RenderableHolder();
@@ -19,5 +20,13 @@ public class RenderableHolder {
     public void add(BaseEntity entity) {
         entities.add(entity);
         entities.sort(comparator);
+    }
+
+    public static RenderableHolder getInstance() {
+        return instance ;
+    }
+
+    public List<IRenderable> getEntities() {
+        return this.entities;
     }
 }
