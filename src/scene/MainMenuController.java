@@ -1,5 +1,6 @@
 package scene;
 
+import application.GameController;
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +38,7 @@ public class MainMenuController {
 
     @FXML
     private void startGame(){
-
+        GameController.getInstance().start();
     }
     @FXML
     private void quitGame() {

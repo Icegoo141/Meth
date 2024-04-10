@@ -18,9 +18,4 @@ public class SceneNav {
         } catch (IOException ignored) {
         }
     }
-
-    public static void setJavaScene(Node root) {
-        Scene scene = new Scene((Parent) root, 1000, 800);
-        Main.getStage().setScene(scene);
-    }
 }
