@@ -19,7 +19,7 @@ public class GameScreen extends Canvas {
         addListerner();
     }
 
-    public void addListerner() {
+    public void addListener() {
         this.setOnKeyPressed((KeyEvent event) -> {
             InputUtility.setKeyPressed(event.getCode(), true);
         });
