@@ -1,16 +1,23 @@
 package application.logic;
 
-import application.input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Player extends BaseCollidable{
     private int speed;
 
-    @Override
-    public void draw(GraphicsContext gc) {
+    public Player() {
+        this.speed = 5;
+        this.z = 1;
     }
 
     public void update() {
 
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        gc.setFill(Color.BLUE);
+        gc.fillRect(x,y,40,40);
     }
 }

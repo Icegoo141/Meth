@@ -3,7 +3,7 @@ package application.logic;
 import application.sharedObject.IRenderable;
 
 public abstract class BaseEntity implements IRenderable {
-    protected double x,y;
+    protected double x, y;
     protected int z;
 
     protected boolean visible, destroyed;
@@ -26,5 +26,21 @@ public abstract class BaseEntity implements IRenderable {
     @Override
     public boolean isVisible() {
         return visible;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 }
