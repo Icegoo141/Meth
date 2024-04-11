@@ -14,7 +14,6 @@ public class Battleground implements IRenderable {
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.GRAY);
         gc.fillRect(0,0,1000,800);
-        System.out.println("hi");
     }
 
     @Override

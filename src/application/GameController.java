@@ -23,6 +23,7 @@ public class GameController {
         StackPane root = new StackPane();
         root.getChildren().add(gameScreen);
         Scene scene = new Scene(root,1000,800);
+        gameScreen.requestFocus();
         Main.getStage().setScene(scene);
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
