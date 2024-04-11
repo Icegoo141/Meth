@@ -17,4 +17,8 @@ public class InputUtility {
         }
         System.out.println(keyPressed);
     }
+
+    public static boolean getKeyPressed(KeyCode keycode) {
+        return keyPressed.contains(keycode);
+    }
 }
