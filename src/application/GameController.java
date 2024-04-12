@@ -12,20 +12,13 @@ public class GameController {
     private GameScreen gameScreen;
     private GameLogic gameLogic;
     private int soundValue;
+    private final AnimationTimer gameLoop;
 
     private GameController() {
         soundValue = 100;
-        gameScreen = new GameScreen(1000,800);
+        gameScreen = new GameScreen(1000, 800);
         gameLogic = new GameLogic();
-    }
-
-    public void start() {
-        StackPane root = new StackPane();
-        root.getChildren().add(gameScreen);
-        Scene scene = new Scene(root,1000,800);
-        gameScreen.requestFocus();
-        Main.getStage().setScene(scene);
-        AnimationTimer gameLoop = new AnimationTimer() {
+        gameLoop = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 //draw
@@ -36,6 +29,14 @@ public class GameController {
                 RenderableHolder.getInstance().update();
             }
         };
+    }
+
+    public void start() {
+        StackPane root = new StackPane();
+        root.getChildren().add(gameScreen);
+        Scene scene = new Scene(root, 1000, 800);
+        gameScreen.requestFocus();
+        Main.getStage().setScene(scene);
         gameLoop.start();
     }
 
@@ -45,10 +46,6 @@ public class GameController {
 
     public void setSoundValue(int soundValue) {
         this.soundValue = soundValue;
-    }
-
-    public GameScreen getGameScreen() {
-        return gameScreen;
     }
 
     public GameLogic getGameLogic() {
