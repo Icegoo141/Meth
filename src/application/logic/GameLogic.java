@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class GameLogic {
     private Player player;
-    private final ArrayList<BaseEntity> enemies;
+    private final ArrayList<BaseGhost> enemies;
 
     private Bullet bullet;
 
@@ -26,25 +26,45 @@ public class GameLogic {
     }
 
     private void addNewEntity(BaseEntity entity) {
-        if (entity instanceof BaseGhost) enemies.add(entity);
+        if (entity instanceof BaseGhost) enemies.add((BaseGhost) entity);
         RenderableHolder.getInstance().add(entity);
     }
 
     public void update() {
         player.update();
-        enemies.forEach(BaseEntity::update);
+        //dev only
+        if (enemies.isEmpty()) {addNewEntity(new BaseGhost(600,600)); addNewEntity(new Ghost2(600,400));}
+        else {
+            enemies.forEach(BaseEntity::update);
+            enemies.forEach(entity -> {
+                if (entity.collideWith(player)) handleDieSequence();
+            });
+        }
         if (bullet != null) {
             bullet.update();
             if (bullet.isDestroyed()) bullet = null;
+            //dev only
             else if (InputUtility.getKeyPressed(KeyCode.SPACE)) bullet.destroyed = true;
         }
         //enemy spawn sequence
+
+        //remove unused enemies
+        for (int i = enemies.size() - 1; i >= 0; i--) {
+            if (enemies.get(i).isDestroyed())
+                enemies.remove(i);
+        }
     }
 
     public void handleShoot(double x, double y, int dirX, int dirY) {
         if (bullet != null) return;
         bullet = new Bullet(x, y, dirX, dirY);
         addNewEntity(bullet);
+    }
+
+    public void handleDieSequence() {
+        enemies.forEach(entity->entity.destroyed = true);
+        player.x = 200;
+        player.y = 200;
     }
 
     public Player getPlayer() {
