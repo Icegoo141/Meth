@@ -5,20 +5,21 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class BaseGhost extends BaseCollidable{
-    private int speed;
+    protected double speed;
     private int hp;
 
     public BaseGhost(double x, double y) {
         this.x = x;
         this.y = y;
-        this.speed = 1;
+        this.speed = .5;
         this.z = 0;
+        this.collisionRadius = 20;
     }
 
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.RED);
-        gc.fillRect(x,y,40,40);
+        gc.fillRect(x-20,y-20,40,40);
     }
 
     public void update() {

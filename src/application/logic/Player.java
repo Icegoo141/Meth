@@ -7,17 +7,18 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 public class Player extends BaseCollidable {
-    private int speed;
+    private double speed;
 
     public Player(double x, double y) {
         this.x = x;
         this.y = y;
-        this.speed = 2;
+        this.speed = 1;
         this.z = 1;
+        this.collisionRadius = 20;
     }
 
     public void update() {
-        //movement
+        // Movement
         if (InputUtility.getKeyPressed(KeyCode.W)) {
             this.y -= speed;
         }
@@ -31,30 +32,33 @@ public class Player extends BaseCollidable {
             this.x += speed;
         }
 
+        // Shooting
         int dirX = 0;
         int dirY = 0;
-        //shooting
-        if (InputUtility.getKeyPressed(KeyCode.UP)) {
-            dirY = dirY - 1;
+
+        // Check for directional shooting
+        if (InputUtility.getKeyPressed(KeyCode.UP))
+            dirY = -1;
+        else if (InputUtility.getKeyPressed(KeyCode.DOWN))
+            dirY = 1;
+        if (InputUtility.getKeyPressed(KeyCode.LEFT))
+            dirX = -1;
+        else if (InputUtility.getKeyPressed(KeyCode.RIGHT))
+            dirX = 1;
+
+        // Handle shooting
+        if (dirY != 0 || dirX != 0) {
+            GameController.getInstance().getGameLogic().handleShoot(x, y, dirX, dirY);
         }
-        if (InputUtility.getKeyPressed(KeyCode.DOWN)) {
-            dirY = dirY + 1;
-        }
-        if (InputUtility.getKeyPressed(KeyCode.LEFT)) {
-            dirX = dirX - 1;
-        }
-        if (InputUtility.getKeyPressed(KeyCode.RIGHT)) {
-            dirX = dirX + 1;
-        }
-        if (dirY != 0 || dirX != 0) GameController.getInstance().getGameLogic().handleShoot(x, y, dirX, dirY);
-        //handle out of bound
-        x = Math.min(1000,Math.max(0,x));
-        y = Math.min(800,Math.max(0,y));
+
+        // Handle out of bounds
+        x = Math.min(1000, Math.max(0, x));
+        y = Math.min(800, Math.max(0, y));
     }
 
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.BLUE);
-        gc.fillRect(x, y, 40, 40);
+        gc.fillRect(x-20, y-20, 40, 40);
     }
 }
