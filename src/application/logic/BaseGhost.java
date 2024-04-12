@@ -1,5 +1,6 @@
 package application.logic;
 
+import application.GameController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -7,7 +8,9 @@ public class BaseGhost extends BaseCollidable{
     private int speed;
     private int hp;
 
-    public BaseGhost() {
+    public BaseGhost(double x, double y) {
+        this.x = x;
+        this.y = y;
         this.speed = 1;
         this.z = 0;
     }
@@ -20,8 +23,8 @@ public class BaseGhost extends BaseCollidable{
 
     public void update() {
         // Calculate direction vector from BaseGhost to Player
-        double dx = GameLogic.getPlayer().getX() - this.getX();
-        double dy = GameLogic.getPlayer().getY() - this.getY();
+        double dx = GameController.getInstance().getGameLogic().getPlayer().x - this.x;
+        double dy = GameController.getInstance().getGameLogic().getPlayer().y - this.y;
 
         // Calculate the distance between the two entities
         double distance = Math.sqrt(dx * dx + dy * dy);
@@ -37,7 +40,7 @@ public class BaseGhost extends BaseCollidable{
         double speedY = dy * speed;
 
         // Update position of second entity
-        this.setX(this.getX() + speedX);
-        this.setY(this.getY() + speedY);
+        this.x = (this.x + speedX);
+        this.y = (this.y + speedY);
     }
 }

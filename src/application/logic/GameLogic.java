@@ -1,42 +1,53 @@
 package application.logic;
 
+import application.input.InputUtility;
 import application.sharedObject.RenderableHolder;
+import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
 
 public class GameLogic {
-    private static Player player;
-    private ArrayList<BaseEntity> entities;
+    private Player player;
+    private final ArrayList<BaseEntity> enemies;
+
+    private Bullet bullet;
 
     public GameLogic() {
-        player = new Player();
-        player.setX(200);
-        player.setY(200);
-
         Battleground bg = new Battleground();
         RenderableHolder.getInstance().add(bg);
 
-        entities = new ArrayList<>();
-        BaseGhost testGhost = new BaseGhost();
-        testGhost.setX(600);
-        testGhost.setY(600);
+        enemies = new ArrayList<>();
+
+        player = new Player(200, 200);
         addNewEntity(player);
+
+        BaseGhost testGhost = new BaseGhost(600, 600);
         addNewEntity(testGhost);
     }
 
     private void addNewEntity(BaseEntity entity) {
-        entities.add(entity);
+        if (entity instanceof BaseGhost) enemies.add(entity);
         RenderableHolder.getInstance().add(entity);
     }
 
     public void update() {
         player.update();
-        entities.forEach(entity -> {
-            if (entity instanceof BaseGhost) ((BaseGhost) entity).update();
-        });
+        enemies.forEach(BaseEntity::update);
+        if (bullet != null) {
+            bullet.update();
+            if (bullet.isDestroyed()) bullet = null;
+            else if (InputUtility.getKeyPressed(KeyCode.SPACE)) bullet.destroyed = true;
+        }
+        //enemy spawn sequence
     }
 
-    public static Player getPlayer() {
+    public void handleShoot(double x, double y, int dirX, int dirY) {
+        if (bullet != null) return;
+        bullet = new Bullet(x, y, dirX, dirY);
+        addNewEntity(bullet);
+    }
+
+    public Player getPlayer() {
         return player;
     }
 }
