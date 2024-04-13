@@ -38,9 +38,15 @@ public class GameLogic {
             enemies.forEach(BaseEntity::update);
             enemies.forEach(entity -> {
                 if (entity.collideWith(player)) handleDieSequence();
+
             });
         }
+
+
         if (bullet != null) {
+            enemies.forEach(entity -> {
+                if(entity.collideWith(bullet) && !bullet.isDestroyed()) handleDieSequence2(entity) ;
+            });
             bullet.update();
             if (bullet.isDestroyed()) bullet = null;
             //dev only
@@ -65,6 +71,11 @@ public class GameLogic {
         enemies.forEach(entity->entity.destroyed = true);
         player.x = 200;
         player.y = 200;
+    }
+
+    public void handleDieSequence2(BaseGhost ghost) {
+        bullet.destroyed = true;
+        ghost.destroyed = true;
     }
 
     public Player getPlayer() {
