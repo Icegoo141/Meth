@@ -13,6 +13,7 @@ public class Bullet extends BaseCollidable {
         this.y = y;
         this.dirX = dirX;
         this.dirY = dirY;
+        this.collisionRadius = 10 ;
     }
 
     public void update() {
