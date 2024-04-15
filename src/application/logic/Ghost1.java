@@ -2,7 +2,7 @@ package application.logic;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class BaseGhost extends BaseCollidable{
+public class Ghost1 extends BaseCollidable{
     @Override
     public void draw(GraphicsContext gc) {
 
