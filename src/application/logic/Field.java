@@ -4,7 +4,7 @@ import application.sharedObject.IRenderable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Battleground implements IRenderable {
+public class Field implements IRenderable {
     @Override
     public int getZ() {
         return -9999;

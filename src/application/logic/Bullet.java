@@ -13,15 +13,13 @@ public class Bullet extends BaseCollidable {
         this.y = y;
         this.dirX = dirX;
         this.dirY = dirY;
-        this.collisionRadius = 10 ;
+        this.collisionRadius = 10;
     }
 
     public void update() {
         this.x = this.x + (dirX * speed);
         this.y = this.y + (dirY * speed);
     }
-
-
 
     @Override
     public void draw(GraphicsContext gc) {

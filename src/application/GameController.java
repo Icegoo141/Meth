@@ -16,8 +16,6 @@ public class GameController {
 
     private GameController() {
         soundValue = 100;
-        gameScreen = new GameScreen(1000, 800);
-        gameLogic = new GameLogic();
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -31,7 +29,13 @@ public class GameController {
         };
     }
 
+    public void initGame() {
+        gameScreen = new GameScreen(1000, 800);
+        gameLogic = new GameLogic();
+    }
+
     public void start() {
+        initGame();
         StackPane root = new StackPane();
         root.getChildren().add(gameScreen);
         Scene scene = new Scene(root, 1000, 800);
@@ -50,6 +54,10 @@ public class GameController {
 
     public GameLogic getGameLogic() {
         return gameLogic;
+    }
+
+    public AnimationTimer getGameLoop() {
+        return gameLoop;
     }
 
     public static GameController getInstance() {
