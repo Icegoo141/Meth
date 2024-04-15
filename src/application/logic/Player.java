@@ -62,7 +62,7 @@ public class Player extends BaseCollidable {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.BLUE);
-        gc.fillRect(x-20, y-20, 40, 40);
+        gc.fillRect(x - 20, y - 20, 40, 40);
     }
 
     public int getDamage() {

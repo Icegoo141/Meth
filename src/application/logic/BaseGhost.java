@@ -4,7 +4,7 @@ import application.GameController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class BaseGhost extends BaseCollidable{
+public class BaseGhost extends BaseCollidable {
     protected double speed;
     protected int hp;
 
@@ -21,7 +21,7 @@ public class BaseGhost extends BaseCollidable{
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.RED);
-        gc.fillRect(x-20,y-20,40,40);
+        gc.fillRect(x - 20, y - 20, 40, 40);
     }
 
     public void update() {

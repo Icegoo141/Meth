@@ -13,7 +13,7 @@ public class Field implements IRenderable {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.GRAY);
-        gc.fillRect(0,0,1000,800);
+        gc.fillRect(0, 0, 1000, 800);
     }
 
     @Override
