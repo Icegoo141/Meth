@@ -2,6 +2,7 @@ package application.logic;
 
 import application.sharedObject.IRenderable;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Field implements IRenderable {
     @Override
@@ -11,7 +12,8 @@ public class Field implements IRenderable {
 
     @Override
     public void draw(GraphicsContext gc) {
-
+        gc.setFill(Color.GRAY);
+        gc.fillRect(0,0,1000,800);
     }
 
     @Override
@@ -21,6 +23,6 @@ public class Field implements IRenderable {
 
     @Override
     public boolean isVisible() {
-        return false;
+        return true;
     }
 }

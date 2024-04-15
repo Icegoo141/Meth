@@ -13,7 +13,7 @@ public class GameLogic {
     private Bullet bullet;
 
     public GameLogic() {
-        Battleground bg = new Battleground();
+        Field bg = new Field();
         RenderableHolder.getInstance().add(bg);
 
         enemies = new ArrayList<>();
