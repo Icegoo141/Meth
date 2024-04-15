@@ -12,6 +12,9 @@ public class GameLogic {
 
     private Bullet bullet;
 
+    private long prevTime;
+    private long currTime;
+
     public GameLogic() {
         Field bg = new Field();
         RenderableHolder.getInstance().add(bg);
@@ -30,12 +33,13 @@ public class GameLogic {
         RenderableHolder.getInstance().add(entity);
     }
 
-    public void update() {
+    public void update(long l) {
+        currTime = l;
         player.update();
         //dev only
         if (enemies.isEmpty()) {addNewEntity(new BaseGhost(600,600)); addNewEntity(new Ghost2(600,400));}
         else {
-            enemies.forEach(BaseEntity::update);
+            enemies.forEach(BaseGhost::update);
             enemies.forEach(entity -> {
                 if (entity.collideWith(player)) handleDieSequence();
 
@@ -59,6 +63,8 @@ public class GameLogic {
             if (enemies.get(i).isDestroyed())
                 enemies.remove(i);
         }
+
+        prevTime = l;
     }
 
     public void handleShoot(double x, double y, int dirX, int dirY) {
@@ -80,5 +86,13 @@ public class GameLogic {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public long getCurrTime() {
+        return currTime;
+    }
+
+    public long getPrevTime() {
+        return prevTime;
     }
 }

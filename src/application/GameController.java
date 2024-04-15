@@ -22,7 +22,7 @@ public class GameController {
                 //draw
                 gameScreen.paintComponent();
                 //logic
-                gameLogic.update();
+                gameLogic.update(l);
                 //objectDeletion
                 RenderableHolder.getInstance().update();
             }
