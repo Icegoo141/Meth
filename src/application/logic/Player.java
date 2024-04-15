@@ -8,13 +8,16 @@ import javafx.scene.paint.Color;
 
 public class Player extends BaseCollidable {
     private double speed;
+    private int damage;
 
     public Player(double x, double y) {
         this.x = x;
         this.y = y;
-        this.speed = 1;
         this.z = 1;
         this.collisionRadius = 20;
+
+        this.speed = 1;
+        this.damage = 1;
     }
 
     public void update() {
@@ -48,7 +51,7 @@ public class Player extends BaseCollidable {
 
         // Handle shooting
         if (dirY != 0 || dirX != 0) {
-            GameController.getInstance().getGameLogic().handleShoot(x, y, dirX, dirY);
+            GameController.getInstance().getGameLogic().handleShoot(dirX, dirY);
         }
 
         // Handle out of bounds
@@ -60,5 +63,9 @@ public class Player extends BaseCollidable {
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.BLUE);
         gc.fillRect(x-20, y-20, 40, 40);
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }

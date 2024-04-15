@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 public class Ghost3 extends BaseGhost{
     public Ghost3(double x, double y) {
         super(x, y);
+        this.hp = 2;
     }
 
     @Override
