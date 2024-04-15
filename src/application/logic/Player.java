@@ -52,8 +52,8 @@ public class Player extends BaseCollidable {
         }
 
         // Handle out of bounds
-        x = Math.min(1000, Math.max(0, x));
-        y = Math.min(800, Math.max(0, y));
+        x = Math.min(740, Math.max(60, x));
+        y = Math.min(740, Math.max(60, y));
     }
 
     @Override
