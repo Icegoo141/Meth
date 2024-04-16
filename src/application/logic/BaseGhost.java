@@ -6,9 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
-public class BaseGhost extends BaseCollidable{
+public class BaseGhost extends BaseCollidable {
     protected double speed;
-    private int hp;
+    protected int hp;
 
     private final Image spite = new Image("/res/Samurai.PNG") ;
 
@@ -19,9 +19,11 @@ public class BaseGhost extends BaseCollidable{
     public BaseGhost(double x, double y) {
         this.x = x;
         this.y = y;
-        this.speed = .5;
         this.z = 0;
         this.collisionRadius = 20;
+
+        this.speed = .5;
+        this.hp = 1;
     }
 
     @Override
@@ -58,10 +60,17 @@ public class BaseGhost extends BaseCollidable{
             isChangeSprite = !isChangeSprite ;
             previousChange = now ;
         }
-   }
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public boolean isDestroyed() {
+        return hp <= 0;
+    }
 }
-
-
-
-
-

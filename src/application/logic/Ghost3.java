@@ -7,8 +7,10 @@ import javafx.scene.paint.Color;
 
 public class Ghost3 extends BaseGhost{
     private final Image spite = new Image("/res/Oni.PNG") ;
+
     public Ghost3(double x, double y) {
         super(x, y);
+        this.hp = 2;
     }
 
     @Override

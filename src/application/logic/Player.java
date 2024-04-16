@@ -16,13 +16,17 @@ public class Player extends BaseCollidable {
     private boolean isChangeSprite ;
 
     private long previousChange = 0 ;
+    private double speed;
+    private int damage;
 
     public Player(double x, double y) {
         this.x = x;
         this.y = y;
-        this.speed = 1;
         this.z = 1;
         this.collisionRadius = 20;
+
+        this.speed = 1;
+        this.damage = 1;
     }
 
     public void update() {
@@ -56,13 +60,12 @@ public class Player extends BaseCollidable {
 
         // Handle shooting
         if (dirY != 0 || dirX != 0) {
-            GameController.getInstance().getGameLogic().handleShoot(x, y, dirX, dirY);
+            GameController.getInstance().getGameLogic().handleShoot(dirX, dirY);
         }
 
         // Handle out of bounds
-        x = Math.min(1000, Math.max(0, x));
-        y = Math.min(800, Math.max(0, y));
-
+        x = Math.min(740, Math.max(60, x));
+        y = Math.min(740, Math.max(60, y));
         //Update sprite
         long now = GameController.getInstance().getGameLogic().getCurrTime() ;
         if(now - previousChange >= 250000000){
@@ -77,4 +80,7 @@ public class Player extends BaseCollidable {
         gc.drawImage(croppedSprite,x-20,y-20);
     }
 
+    public int getDamage() {
+        return damage;
+    }
 }

@@ -10,6 +10,7 @@ public class RenderableHolder {
     private final ArrayList<IRenderable> entities;
 
     private final Comparator<IRenderable> comparator;
+
     private RenderableHolder() {
         entities = new ArrayList<>();
         comparator = Comparator.comparingInt(IRenderable::getZ);
@@ -28,7 +29,7 @@ public class RenderableHolder {
     }
 
     public static RenderableHolder getInstance() {
-        return instance ;
+        return instance;
     }
 
     public List<IRenderable> getEntities() {
