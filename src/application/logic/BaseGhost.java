@@ -4,22 +4,24 @@ import application.GameController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class BaseGhost extends BaseCollidable{
+public class BaseGhost extends BaseCollidable {
     protected double speed;
-    private int hp;
+    protected int hp;
 
     public BaseGhost(double x, double y) {
         this.x = x;
         this.y = y;
-        this.speed = .5;
         this.z = 0;
         this.collisionRadius = 20;
+
+        this.speed = .5;
+        this.hp = 1;
     }
 
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.RED);
-        gc.fillRect(x-20,y-20,40,40);
+        gc.fillRect(x - 20, y - 20, 40, 40);
     }
 
     public void update() {
@@ -43,5 +45,17 @@ public class BaseGhost extends BaseCollidable{
         // Update position of second entity
         this.x = (this.x + speedX);
         this.y = (this.y + speedY);
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public boolean isDestroyed() {
+        return hp <= 0;
     }
 }

@@ -13,6 +13,7 @@ import utils.SceneNav;
 public class CreditController {
     @FXML
     private Button toMenu;
+
     @FXML
     private void backToMainMenu() {
         SceneNav.setFXMLScene("MainMenu");

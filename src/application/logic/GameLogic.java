@@ -3,17 +3,18 @@ package application.logic;
 import application.input.InputUtility;
 import application.sharedObject.RenderableHolder;
 import javafx.scene.input.KeyCode;
+import utils.RandomSpawn;
 
 import java.util.ArrayList;
 
 public class GameLogic {
+    private int level;
     private Player player;
     private final ArrayList<BaseGhost> enemies;
 
     private Bullet bullet;
 
-    private long prevTime;
-    private long currTime;
+    private long prevSpawnTime;
 
     public GameLogic() {
         Field bg = new Field();
@@ -24,8 +25,7 @@ public class GameLogic {
         player = new Player(200, 200);
         addNewEntity(player);
 
-        BaseGhost testGhost = new BaseGhost(600, 600);
-        addNewEntity(testGhost);
+        level = 1;
     }
 
     private void addNewEntity(BaseEntity entity) {
@@ -34,65 +34,56 @@ public class GameLogic {
     }
 
     public void update(long l) {
-        currTime = l;
         player.update();
-        //dev only
-        if (enemies.isEmpty()) {addNewEntity(new BaseGhost(600,600)); addNewEntity(new Ghost2(600,400));}
-        else {
-            enemies.forEach(BaseGhost::update);
-            enemies.forEach(entity -> {
-                if (entity.collideWith(player)) handleDieSequence();
-
-            });
+        for (BaseGhost ghost : enemies) {
+            ghost.update();
+            if (ghost.collideWith(player)) {
+                handlePlayerDie();
+                break;
+            }
         }
-
 
         if (bullet != null) {
             enemies.forEach(entity -> {
-                if(entity.collideWith(bullet) && !bullet.isDestroyed()) handleDieSequence2(entity) ;
+                if (entity.collideWith(bullet) && !bullet.isDestroyed()) handleBulletHit(entity);
             });
             bullet.update();
             if (bullet.isDestroyed()) bullet = null;
-            //dev only
-            else if (InputUtility.getKeyPressed(KeyCode.SPACE)) bullet.destroyed = true;
         }
+
         //enemy spawn sequence
+        //spawn an enemy once every around 500 ms
+        if (l - prevSpawnTime >= 2e9) {
+            BaseGhost enemy = RandomSpawn.spawnGhost(1);
+            addNewEntity(enemy);
+            prevSpawnTime = l;
+        }
 
         //remove unused enemies
         for (int i = enemies.size() - 1; i >= 0; i--) {
             if (enemies.get(i).isDestroyed())
                 enemies.remove(i);
         }
-
-        prevTime = l;
     }
 
-    public void handleShoot(double x, double y, int dirX, int dirY) {
+    public void handleShoot(int dirX, int dirY) {
         if (bullet != null) return;
-        bullet = new Bullet(x, y, dirX, dirY);
+        bullet = new Bullet(player.x + 30 * dirX, player.y + 30 * dirY, dirX, dirY, player.getDamage());
         addNewEntity(bullet);
     }
 
-    public void handleDieSequence() {
-        enemies.forEach(entity->entity.destroyed = true);
-        player.x = 200;
-        player.y = 200;
+    public void handlePlayerDie() {
+        enemies.forEach(entity -> entity.setHp(0));
+        player.x = 400;
+        player.y = 400;
     }
 
-    public void handleDieSequence2(BaseGhost ghost) {
+    public void handleBulletHit(BaseGhost ghost) {
         bullet.destroyed = true;
-        ghost.destroyed = true;
+        ghost.setHp(ghost.getHp() - bullet.getDamage());
     }
 
     public Player getPlayer() {
         return player;
-    }
-
-    public long getCurrTime() {
-        return currTime;
-    }
-
-    public long getPrevTime() {
-        return prevTime;
     }
 }

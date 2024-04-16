@@ -8,115 +8,61 @@ import application.logic.Ghost4;
 import java.util.Random;
 
 public class RandomSpawn {
+    private static final Random rand = new Random();
+
     public static BaseGhost spawnGhost(int level) {
-
-        Random rand = new Random();
-        int randSpawn = rand.nextInt(100);
+        // Fixed spawn positions
         int randPos = rand.nextInt(16);
+        double x, y;
 
-        double x,y ;
-        if (randPos <= 3) {
-            x = 20 ;
-            if (randPos == 0) {
-                y = 340 ;
-            }
-            else if (randPos == 1) {
-                y = 380 ;
-            }
-            else if (randPos == 2) {
-                y = 420 ;
-            }
-            else {
-                y = 460 ;
-            }
-        }
-        else if (randPos <= 7) {
-            y = 20 ;
-            if (randPos == 4) {
-                x = 340 ;
-            }
-            else if (randPos == 5) {
-                x = 380 ;
-            }
-            else if (randPos == 6) {
-                x = 420 ;
-            }
-            else {
-                x = 460 ;
-            }
-        }
-        else if (randPos <= 11) {
-            x = 780 ;
-            if (randPos == 8) {
-                y = 340 ;
-            }
-            else if (randPos == 9) {
-                y = 380 ;
-            }
-            else if (randPos == 10) {
-                y = 420 ;
-            }
-            else {
-                y = 460 ;
-            }
-        }
-        else {
-            y = 780 ;
-            if (randPos == 12) {
-                x = 340 ;
-            }
-            else if (randPos == 13) {
-                x = 380 ;
-            }
-            else if (randPos == 14) {
-                x = 420 ;
-            }
-            else {
-                x = 460 ;
-            }
+        if (randPos < 4) {
+            x = 20;
+            y = 340 + 40 * randPos;
+        } else if (randPos < 8) {
+            x = 340 + 40 * (randPos - 4);
+            y = 20;
+        } else if (randPos < 12) {
+            x = 780;
+            y = 340 + 40 * (randPos - 8);
+        } else {
+            x = 340 + 40 * (randPos - 12);
+            y = 780;
         }
 
-        if (level == 1) {
-            if (randSpawn <=39) {
-                return new BaseGhost(x,y);
-            }
-            else if (randSpawn <= 69) {
-                return new Ghost2(x,y);
-            }
-            else if (randSpawn <= 89) {
-                return new Ghost3(x,y);
-            }
-            else {
-                return new Ghost4(x,y);
-            }
+        // Set chances of spawning different types of ghosts based on the level
+        int baseChance, ghost2Chance, ghost3Chance, ghost4Chance;
+        int randSpawn = rand.nextInt(100);
+
+        switch (level) {
+            case 1:
+                baseChance = 40;
+                ghost2Chance = 30;
+                ghost3Chance = 20;
+                ghost4Chance = 10;
+                break;
+            case 2:
+                baseChance = 20;
+                ghost2Chance = 35;
+                ghost3Chance = 30;
+                ghost4Chance = 15;
+                break;
+            default:
+                baseChance = 10;
+                ghost2Chance = 30;
+                ghost3Chance = 40;
+                ghost4Chance = 20;
+                break;
         }
-        else if(level == 2) {
-            if (randSpawn <=19) {
-                return new BaseGhost(x,y);
-            }
-            else if (randSpawn <= 54) {
-                return new Ghost2(x,y);
-            }
-            else if (randSpawn <= 84) {
-                return new Ghost3(x,y);
-            }
-            else {
-                return new Ghost4(x,y);
-            }
-        }
-        else {
-            if (randSpawn <=9) {
-                return new BaseGhost(x,y);
-            }
-            else if (randSpawn <= 39) {
-                return new Ghost2(x,y);
-            }
-            else if (randSpawn <= 79) {
-                return new Ghost3(x,y);
-            }
-            else {
-                return new Ghost4(x,y);
-            }
+
+        // Determine which type of ghost to spawn based on the random chance
+        if (randSpawn < baseChance) {
+            return new BaseGhost(x, y);
+        } else if (randSpawn < baseChance + ghost2Chance) {
+            return new Ghost2(x, y);
+        } else if (randSpawn < baseChance + ghost2Chance + ghost3Chance) {
+            return new Ghost3(x, y);
+        } else {
+            return new Ghost4(x, y);
         }
     }
 }

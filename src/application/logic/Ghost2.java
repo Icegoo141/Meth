@@ -12,6 +12,6 @@ public class Ghost2 extends BaseGhost {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.LIGHTPINK);
-        gc.fillOval(x-20,y-20,40,40);
+        gc.fillOval(x - 20, y - 20, 40, 40);
     }
 }
