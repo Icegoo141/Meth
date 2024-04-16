@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 
 public class Ghost2 extends BaseGhost {
 
-    private final Image spite = new Image("/res/Ninja.PNG") ;
+    private final Image spite = new Image("/res/Ninja.PNG");
 
     public Ghost2(double x, double y) {
         super(x, y);
@@ -17,7 +17,7 @@ public class Ghost2 extends BaseGhost {
 
     @Override
     public void draw(GraphicsContext gc) {
-        WritableImage croppedSprite = new WritableImage(spite.getPixelReader(), (isChangeSprite?0:1)*40 ,0,40,40 ) ;
-        gc.drawImage(croppedSprite,x-20,y-20);
+        WritableImage croppedSprite = new WritableImage(spite.getPixelReader(), (isChangeSprite ? 0 : 1) * 40, 0, 40, 40);
+        gc.drawImage(croppedSprite, x - 20, y - 20);
     }
 }

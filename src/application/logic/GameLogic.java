@@ -15,6 +15,7 @@ public class GameLogic {
     private Bullet bullet;
 
     private long prevSpawnTime;
+    private long currTime;
 
     public GameLogic() {
         Field bg = new Field();
@@ -34,6 +35,7 @@ public class GameLogic {
     }
 
     public void update(long l) {
+        currTime = l;
         player.update();
         for (BaseGhost ghost : enemies) {
             ghost.update();
@@ -85,5 +87,9 @@ public class GameLogic {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public long getCurrTime() {
+        return currTime;
     }
 }

@@ -10,12 +10,11 @@ import javafx.scene.input.KeyCode;
 
 public class Player extends BaseCollidable {
 
-    private final Image spite = new Image("/res/Player.PNG") ;
-    private final double speed;
+    private final Image spite = new Image("/res/Player.PNG");
 
-    private boolean isChangeSprite ;
+    private boolean isChangeSprite;
 
-    private long previousChange = 0 ;
+    private long previousChange = 0;
     private double speed;
     private int damage;
 
@@ -49,14 +48,10 @@ public class Player extends BaseCollidable {
         int dirY = 0;
 
         // Check for directional shooting
-        if (InputUtility.getKeyPressed(KeyCode.UP))
-            dirY = -1;
-        else if (InputUtility.getKeyPressed(KeyCode.DOWN))
-            dirY = 1;
-        if (InputUtility.getKeyPressed(KeyCode.LEFT))
-            dirX = -1;
-        else if (InputUtility.getKeyPressed(KeyCode.RIGHT))
-            dirX = 1;
+        if (InputUtility.getKeyPressed(KeyCode.UP)) dirY = -1;
+        else if (InputUtility.getKeyPressed(KeyCode.DOWN)) dirY = 1;
+        if (InputUtility.getKeyPressed(KeyCode.LEFT)) dirX = -1;
+        else if (InputUtility.getKeyPressed(KeyCode.RIGHT)) dirX = 1;
 
         // Handle shooting
         if (dirY != 0 || dirX != 0) {
@@ -67,17 +62,17 @@ public class Player extends BaseCollidable {
         x = Math.min(740, Math.max(60, x));
         y = Math.min(740, Math.max(60, y));
         //Update sprite
-        long now = GameController.getInstance().getGameLogic().getCurrTime() ;
-        if(now - previousChange >= 250000000){
+        long now = GameController.getInstance().getGameLogic().getCurrTime();
+        if (now - previousChange >= 250000000) {
             isChangeSprite = !isChangeSprite;
-            previousChange = now ;
+            previousChange = now;
         }
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        WritableImage croppedSprite = new WritableImage(spite.getPixelReader(), (isChangeSprite?0:1)*40 ,0,40,40 ) ;
-        gc.drawImage(croppedSprite,x-20,y-20);
+        WritableImage croppedSprite = new WritableImage(spite.getPixelReader(), (isChangeSprite ? 0 : 1) * 40, 0, 40, 40);
+        gc.drawImage(croppedSprite, x - 20, y - 20);
     }
 
     public int getDamage() {

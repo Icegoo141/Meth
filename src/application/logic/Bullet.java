@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 public class Bullet extends BaseCollidable {
 
-    private final Image spite = new Image("/res/Bullet.PNG") ;
+    private final Image spite = new Image("/res/Bullet.PNG");
     private final int speed = 3;
     private int dirX;
     private int dirY;
@@ -32,7 +32,7 @@ public class Bullet extends BaseCollidable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(spite,x-10,y-10);
+        gc.drawImage(spite, x - 10, y - 10);
     }
 
     public int getDamage() {
