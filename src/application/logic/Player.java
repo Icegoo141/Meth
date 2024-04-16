@@ -3,11 +3,19 @@ package application.logic;
 import application.GameController;
 import application.input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
+
 
 public class Player extends BaseCollidable {
-    private double speed;
+
+    private final Image spite = new Image("/res/Player.PNG") ;
+    private final double speed;
+
+    private boolean isChangeSprite ;
+
+    private long previousChange = 0 ;
 
     public Player(double x, double y) {
         this.x = x;
@@ -54,11 +62,19 @@ public class Player extends BaseCollidable {
         // Handle out of bounds
         x = Math.min(1000, Math.max(0, x));
         y = Math.min(800, Math.max(0, y));
+
+        //Update sprite
+        long now = GameController.getInstance().getGameLogic().getCurrTime() ;
+        if(now - previousChange >= 250000000){
+            isChangeSprite = !isChangeSprite;
+            previousChange = now ;
+        }
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.BLUE);
-        gc.fillRect(x-20, y-20, 40, 40);
+        WritableImage croppedSprite = new WritableImage(spite.getPixelReader(), (isChangeSprite?0:1)*40 ,0,40,40 ) ;
+        gc.drawImage(croppedSprite,x-20,y-20);
     }
+
 }
