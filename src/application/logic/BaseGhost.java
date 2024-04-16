@@ -2,11 +2,19 @@ package application.logic;
 
 import application.GameController;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 public class BaseGhost extends BaseCollidable {
     protected double speed;
     protected int hp;
+
+    private final Image spite = new Image("/res/Samurai.PNG") ;
+
+    protected boolean isChangeSprite ;
+
+    private long previousChange = 0 ;
 
     public BaseGhost(double x, double y) {
         this.x = x;
@@ -20,8 +28,8 @@ public class BaseGhost extends BaseCollidable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.RED);
-        gc.fillRect(x - 20, y - 20, 40, 40);
+        WritableImage cropedSprite = new WritableImage(spite.getPixelReader(), (isChangeSprite?0:1)*40 ,0,40,40 ) ;
+        gc.drawImage(cropedSprite,x-20,y-20);
     }
 
     public void update() {
@@ -45,6 +53,13 @@ public class BaseGhost extends BaseCollidable {
         // Update position of second entity
         this.x = (this.x + speedX);
         this.y = (this.y + speedY);
+
+        //Update sprite
+        long now = GameController.getInstance().getGameLogic().getCurrTime() ;
+        if(now - previousChange >= 250000000){
+            isChangeSprite = !isChangeSprite ;
+            previousChange = now ;
+        }
     }
 
     public int getHp() {
