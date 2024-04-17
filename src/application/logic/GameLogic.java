@@ -81,7 +81,6 @@ public class GameLogic {
         if (bullet != null) {
             bullet.destroyed = true ;
         }
-
     }
 
     public void handleBulletHit(BaseGhost ghost) {
