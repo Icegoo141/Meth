@@ -55,7 +55,7 @@ public class GameLogic {
 
         //enemy spawn sequence
         //spawn an enemy once every around 500 ms
-        if (l - prevSpawnTime >= 2e9) {
+        if (l - prevSpawnTime >= 1e9) {
             BaseGhost enemy = RandomSpawn.spawnGhost(1);
             addNewEntity(enemy);
             prevSpawnTime = l;
@@ -78,6 +78,9 @@ public class GameLogic {
         enemies.forEach(entity -> entity.setHp(0));
         player.x = 400;
         player.y = 400;
+        if (bullet != null) {
+            bullet.destroyed = true ;
+        }
     }
 
     public void handleBulletHit(BaseGhost ghost) {
