@@ -9,7 +9,7 @@ import javafx.scene.image.WritableImage;
 public class Explosion implements IRenderable {
     private double x ,y ;
     private int changedSprite = 0 ;
-    private long previousChange = 0 ;
+    private long previousChange ;
     private Image sprite = new Image(ClassLoader.getSystemResource("EnemyExplosion.png").toString()) ;
 
     protected boolean destroyed = false ;
@@ -17,6 +17,7 @@ public class Explosion implements IRenderable {
     public Explosion(double x, double y) {
         this.x = x;
         this.y = y;
+        this.previousChange = GameController.getInstance().getGameLogic().getCurrTime();
     }
     @Override
     public int getZ() {
