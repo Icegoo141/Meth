@@ -26,7 +26,7 @@ public class Explosion implements IRenderable {
 
     public void update(){
         long now = GameController.getInstance().getGameLogic().getCurrTime();
-        if (now - previousChange >= 2e8) {
+        if (now - previousChange >= 12e7) {
             changedSprite++ ;
             if (changedSprite >= 5) {
                 this.destroyed = true;
