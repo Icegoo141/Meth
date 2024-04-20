@@ -17,6 +17,7 @@ public class Player extends BaseCollidable {
     private long previousChange = 0;
     private double speed;
     private int damage;
+    private int hp ;
 
     public Player(double x, double y) {
         this.x = x;
@@ -26,6 +27,7 @@ public class Player extends BaseCollidable {
 
         this.speed = 1;
         this.damage = 1;
+        this.hp = 3 ;
     }
 
     public void update() {
@@ -77,5 +79,13 @@ public class Player extends BaseCollidable {
 
     public int getDamage() {
         return damage;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp ;
+    }
+
+    public int getHp() {
+        return this.hp ;
     }
 }

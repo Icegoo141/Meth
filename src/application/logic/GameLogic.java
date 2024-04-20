@@ -4,6 +4,7 @@ import application.input.InputUtility;
 import application.sharedObject.RenderableHolder;
 import javafx.scene.input.KeyCode;
 import utils.RandomSpawn;
+import utils.SceneNav;
 
 import java.util.ArrayList;
 
@@ -78,8 +79,12 @@ public class GameLogic {
         enemies.forEach(entity -> entity.setHp(0));
         player.x = 400;
         player.y = 400;
+        player.setHp(player.getHp() - 1);
         if (bullet != null) {
             bullet.destroyed = true ;
+        }
+        if (player.getHp() <= 0) {
+            SceneNav.setFXMLScene("MainMenu");
         }
     }
 
