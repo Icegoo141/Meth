@@ -13,7 +13,7 @@ public class GameLogic {
     private int level;
     private Player player;
     private final ArrayList<BaseGhost> enemies;
-
+    private final ArrayList<Explosion> explosions;
     private Life life ;
 
     private Bullet bullet;
@@ -28,6 +28,7 @@ public class GameLogic {
         RenderableHolder.getInstance().add(life);
 
         enemies = new ArrayList<>();
+        explosions = new ArrayList<>();
 
         player = new Player(400, 400);
         addNewEntity(player);
@@ -42,6 +43,7 @@ public class GameLogic {
 
     public void update(long l) {
         currTime = l;
+
         player.update();
         for (BaseGhost ghost : enemies) {
             ghost.update();
@@ -49,6 +51,9 @@ public class GameLogic {
                 handlePlayerDie();
                 break;
             }
+        }
+        for (Explosion explosion : explosions) {
+            explosion.update();
         }
 
         if (bullet != null) {
@@ -72,6 +77,10 @@ public class GameLogic {
             if (enemies.get(i).isDestroyed())
                 enemies.remove(i);
         }
+        for (int i = explosions.size() - 1; i >= 0; i--) {
+            if (explosions.get(i).isDestroyed())
+                explosions.remove(i);
+        }
     }
 
     public void handleShoot(int dirX, int dirY) {
@@ -88,6 +97,7 @@ public class GameLogic {
         if (bullet != null) {
             bullet.destroyed = true ;
         }
+        explosions.forEach(explosion -> explosion.destroyed = true) ;
         if (life.getLife() <= 0) {
             GameController.getInstance().getGameLoop().stop();
             RenderableHolder.getInstance().getEntities().clear();
@@ -99,6 +109,11 @@ public class GameLogic {
     public void handleBulletHit(BaseGhost ghost) {
         bullet.destroyed = true;
         ghost.setHp(ghost.getHp() - bullet.getDamage());
+        if (ghost.isDestroyed()) {
+            Explosion explosion = new Explosion(ghost.x,ghost.y) ;
+            explosions.add(explosion) ;
+            RenderableHolder.getInstance().add(explosion);
+        }
     }
 
     public Player getPlayer() {
