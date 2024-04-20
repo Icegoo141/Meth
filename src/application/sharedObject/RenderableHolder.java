@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class RenderableHolder {
+public class RenderableHolder{
     private static final RenderableHolder instance = new RenderableHolder();
 
     private final ArrayList<IRenderable> entities;

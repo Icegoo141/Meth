@@ -1,8 +1,8 @@
 package application.logic;
 
-import application.input.InputUtility;
+
+import application.GameController;
 import application.sharedObject.RenderableHolder;
-import javafx.scene.input.KeyCode;
 import utils.RandomSpawn;
 import utils.SceneNav;
 
@@ -13,6 +13,8 @@ public class GameLogic {
     private Player player;
     private final ArrayList<BaseGhost> enemies;
 
+    private Life life ;
+
     private Bullet bullet;
 
     private long prevSpawnTime;
@@ -20,11 +22,13 @@ public class GameLogic {
 
     public GameLogic() {
         Field bg = new Field();
+        life = new Life() ;
         RenderableHolder.getInstance().add(bg);
+        RenderableHolder.getInstance().add(life);
 
         enemies = new ArrayList<>();
 
-        player = new Player(200, 200);
+        player = new Player(400, 400);
         addNewEntity(player);
 
         level = 1;
@@ -79,11 +83,13 @@ public class GameLogic {
         enemies.forEach(entity -> entity.setHp(0));
         player.x = 400;
         player.y = 400;
-        player.setHp(player.getHp() - 1);
+        life.setLife(life.getLife() - 1);
         if (bullet != null) {
             bullet.destroyed = true ;
         }
-        if (player.getHp() <= 0) {
+        if (life.getLife() <= 0) {
+            GameController.getInstance().getGameLoop().stop();
+            RenderableHolder.getInstance().getEntities().clear();
             SceneNav.setFXMLScene("MainMenu");
         }
     }
@@ -100,4 +106,5 @@ public class GameLogic {
     public long getCurrTime() {
         return currTime;
     }
+
 }

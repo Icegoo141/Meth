@@ -1,5 +1,9 @@
 package application.input;
 
+import application.GameController;
+import application.logic.GameLogic;
+import application.logic.Life;
+import application.logic.Player;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
@@ -15,7 +19,7 @@ public class InputUtility {
         } else {
             keyPressed.remove(keyCode);
         }
-//        System.out.println(keyPressed);
+        System.out.println(keyPressed);
     }
 
     public static boolean getKeyPressed(KeyCode keycode) {
