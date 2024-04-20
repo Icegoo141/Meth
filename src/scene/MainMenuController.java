@@ -1,5 +1,6 @@
 package scene;
 
+import application.GameController;
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,7 @@ public class MainMenuController {
     @FXML
     private Button setting;
     @FXML
-    private Button quit ;
+    private Button quit;
 
     @FXML
     private void goToCredit() {
@@ -36,23 +37,24 @@ public class MainMenuController {
     }
 
     @FXML
-    private void startGame(){
-
+    private void startGame() {
+        GameController.getInstance().start();
     }
+
     @FXML
     private void quitGame() {
         Main.getStage().close();
     }
 
     @FXML
-    private void onMouseEnter(javafx.scene.input.MouseEvent event){
-        Button hoverButton = (Button) event.getSource() ;
+    private void onMouseEnter(javafx.scene.input.MouseEvent event) {
+        Button hoverButton = (Button) event.getSource();
         hoverButton.setTextFill(Color.rgb(177, 128, 168));
     }
 
     @FXML
-    private void onMouseExit(javafx.scene.input.MouseEvent event){
-        Button hoverButton = (Button) event.getSource() ;
+    private void onMouseExit(javafx.scene.input.MouseEvent event) {
+        Button hoverButton = (Button) event.getSource();
         hoverButton.setTextFill(Color.rgb(79, 66, 134));
     }
 
