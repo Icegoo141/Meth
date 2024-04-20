@@ -10,136 +10,153 @@
 <?import javafx.scene.text.Text?>
 
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scene.CreditController">
-   <children>
-      <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../res/mainMenuBackGround.png" />
-         </image>
-      </ImageView>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: rgba(0, 0, 0,0.88);">
-         <children>
-            <Text fill="WHITE" layoutY="55.0" strokeWidth="0.0" text="Credits" textAlignment="CENTER" wrappingWidth="1000.0">
-               <font>
-                  <Font name="Candara Bold Italic" size="65.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="60.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Developer" textAlignment="CENTER" wrappingWidth="492.800048828125">
-               <font>
-                  <Font name="Candara" size="40.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Chanonphat Chengpanom" textAlignment="CENTER" wrappingWidth="492.800048828125">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Krittapas Kongvijite" textAlignment="CENTER" wrappingWidth="1000.0">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Isoon Thipthanasup" textAlignment="CENTER" wrappingWidth="1000.0">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Thana Assawanadda" textAlignment="CENTER" wrappingWidth="1000.0">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Art Design" textAlignment="CENTER" wrappingWidth="492.800048828125">
-               <font>
-                  <Font name="Candara" size="40.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Krittapas Kongvijite" textAlignment="CENTER" wrappingWidth="1000.0">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Game Design" textAlignment="CENTER" wrappingWidth="492.800048828125">
-               <font>
-                  <Font name="Candara" size="40.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Chanonphat Chengpanom" textAlignment="CENTER" wrappingWidth="492.800048828125">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Krittapas Kongvijite" textAlignment="CENTER" wrappingWidth="1000.0">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Isoon Thipthanasup" textAlignment="CENTER" wrappingWidth="1000.0">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Tester" textAlignment="CENTER" wrappingWidth="492.800048828125">
-               <font>
-                  <Font name="Candara" size="40.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Text fill="WHITE" strokeWidth="0.0" text="Thana Assawanadda" textAlignment="CENTER" wrappingWidth="1000.0">
-               <font>
-                  <Font name="Candara Italic" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Button fx:id="toMenu" mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="42.0" prefWidth="185.0" text="Back to Main Menu">
-               <VBox.margin>
-                  <Insets top="35.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-   </children>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+           prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="scene.CreditController">
+    <children>
+        <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true"
+                   fx:id="backgroundImage"/>
+
+        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0"
+              style="-fx-background-color: rgba(0, 0, 0,0.88);">
+            <children>
+                <Text fill="WHITE" layoutY="55.0" strokeWidth="0.0" text="Credits" textAlignment="CENTER"
+                      wrappingWidth="1000.0">
+                    <font>
+                        <Font name="Candara Bold Italic" size="65.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="60.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Developer" textAlignment="CENTER"
+                      wrappingWidth="492.800048828125">
+                    <font>
+                        <Font name="Candara" size="40.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Chanonphat Chengpanom" textAlignment="CENTER"
+                      wrappingWidth="492.800048828125">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Krittapas Kongvijite" textAlignment="CENTER"
+                      wrappingWidth="1000.0">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Isoon Thipthanasup" textAlignment="CENTER"
+                      wrappingWidth="1000.0">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Thana Assawanadda" textAlignment="CENTER"
+                      wrappingWidth="1000.0">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Art Design" textAlignment="CENTER"
+                      wrappingWidth="492.800048828125">
+                    <font>
+                        <Font name="Candara" size="40.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Krittapas Kongvijite" textAlignment="CENTER"
+                      wrappingWidth="1000.0">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Game Design" textAlignment="CENTER"
+                      wrappingWidth="492.800048828125">
+                    <font>
+                        <Font name="Candara" size="40.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Chanonphat Chengpanom" textAlignment="CENTER"
+                      wrappingWidth="492.800048828125">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Krittapas Kongvijite" textAlignment="CENTER"
+                      wrappingWidth="1000.0">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Isoon Thipthanasup" textAlignment="CENTER"
+                      wrappingWidth="1000.0">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Tester" textAlignment="CENTER"
+                      wrappingWidth="492.800048828125">
+                    <font>
+                        <Font name="Candara" size="40.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </Text>
+                <Text fill="WHITE" strokeWidth="0.0" text="Thana Assawanadda" textAlignment="CENTER"
+                      wrappingWidth="1000.0">
+                    <font>
+                        <Font name="Candara Italic" size="20.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+                <Button fx:id="toMenu" mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="42.0"
+                        prefWidth="185.0" text="Back to Main Menu">
+                    <VBox.margin>
+                        <Insets top="35.0"/>
+                    </VBox.margin>
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </children>
 </StackPane>

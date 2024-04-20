@@ -21,4 +21,8 @@ public class InputUtility {
     public static boolean getKeyPressed(KeyCode keycode) {
         return keyPressed.contains(keycode);
     }
+
+    public static void clear() {
+        keyPressed.clear();
+    }
 }

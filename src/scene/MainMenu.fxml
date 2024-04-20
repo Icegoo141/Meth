@@ -9,11 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scene.MainMenuController">
-   <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../res/mainMenuBackGround.png" />
-      </image>
-   </ImageView>
+   <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true" fx:id="backgroundImage"/>
    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
       <children>
          <Button fx:id="start" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startGame" onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="70.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Start Game" textAlignment="CENTER" textFill="#4f4286">

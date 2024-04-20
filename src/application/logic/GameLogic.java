@@ -1,10 +1,8 @@
 package application.logic;
 
-import application.input.InputUtility;
+import application.GameController;
 import application.sharedObject.RenderableHolder;
-import javafx.scene.input.KeyCode;
 import utils.RandomSpawn;
-import utils.SceneNav;
 
 import java.util.ArrayList;
 
@@ -12,22 +10,27 @@ public class GameLogic {
     private int level;
     private Player player;
     private final ArrayList<BaseGhost> enemies;
-
     private Bullet bullet;
-
+    private HUD hud;
     private long prevSpawnTime;
     private long currTime;
+    private long startTime;
 
-    public GameLogic() {
+    public GameLogic(int level) {
         Field bg = new Field();
         RenderableHolder.getInstance().add(bg);
 
+        hud = new HUD();
+        RenderableHolder.getInstance().add(hud);
+
         enemies = new ArrayList<>();
 
-        player = new Player(200, 200);
+        player = new Player(400, 400);
         addNewEntity(player);
 
-        level = 1;
+        this.level = level;
+
+        startTime = -1;
     }
 
     private void addNewEntity(BaseEntity entity) {
@@ -37,6 +40,8 @@ public class GameLogic {
 
     public void update(long l) {
         currTime = l;
+        if (startTime == -1) startTime = l;
+
         player.update();
         for (BaseGhost ghost : enemies) {
             ghost.update();
@@ -54,8 +59,7 @@ public class GameLogic {
             if (bullet.isDestroyed()) bullet = null;
         }
 
-        //enemy spawn sequence
-        //spawn an enemy once every around 500 ms
+        //spawn an enemy every second
         if (l - prevSpawnTime >= 1e9) {
             BaseGhost enemy = RandomSpawn.spawnGhost(1);
             addNewEntity(enemy);
@@ -67,6 +71,19 @@ public class GameLogic {
             if (enemies.get(i).isDestroyed())
                 enemies.remove(i);
         }
+
+        // Calculate elapsed time in seconds
+        double elapsedTimeSeconds = (l - startTime) / 1_000_000_000.0;
+
+        // Calculate remaining time
+        double remainingTime = 60 - elapsedTimeSeconds;
+        if (remainingTime < 0) {
+            remainingTime = 0; // Round timer to 0 if time's up
+            GameController.getInstance().handleQuit(); // Stop the timer when time's up
+        }
+
+        // Update the timer label
+        hud.setRemainingTime(remainingTime);
     }
 
     public void handleShoot(int dirX, int dirY) {
@@ -81,10 +98,10 @@ public class GameLogic {
         player.y = 400;
         player.setHp(player.getHp() - 1);
         if (bullet != null) {
-            bullet.destroyed = true ;
+            bullet.destroyed = true;
         }
         if (player.getHp() <= 0) {
-            SceneNav.setFXMLScene("MainMenu");
+            GameController.getInstance().handleQuit();
         }
     }
 

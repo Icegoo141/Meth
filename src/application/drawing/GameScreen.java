@@ -25,9 +25,7 @@ public class GameScreen extends Canvas {
     public void addListener() {
         this.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode().equals(KeyCode.ESCAPE)) {
-                GameController.getInstance().getGameLoop().stop();
-                RenderableHolder.getInstance().getEntities().clear();
-                SceneNav.setFXMLScene("MainMenu");
+                GameController.getInstance().handleQuit();
             }
             InputUtility.setKeyPressed(event.getCode(), true);
         });

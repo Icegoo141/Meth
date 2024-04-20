@@ -1,6 +1,7 @@
 package application.logic;
 
 import application.GameController;
+import application.sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -9,8 +10,6 @@ import javafx.scene.paint.Color;
 public class BaseGhost extends BaseCollidable {
     protected double speed;
     protected int hp;
-
-    private final Image spite = new Image("/res/Samurai.PNG");
 
     protected boolean isChangeSprite;
 
@@ -28,8 +27,8 @@ public class BaseGhost extends BaseCollidable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        WritableImage cropedSprite = new WritableImage(spite.getPixelReader(), (isChangeSprite ? 0 : 1) * 40, 0, 40, 40);
-        gc.drawImage(cropedSprite, x - 20, y - 20);
+        WritableImage croppedSprite = new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), (isChangeSprite ? 0 : 1) * 40, 0, 40, 40);
+        gc.drawImage(croppedSprite, x - 20, y - 20);
     }
 
     public void update() {
