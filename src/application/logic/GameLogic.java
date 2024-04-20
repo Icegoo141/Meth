@@ -2,6 +2,7 @@ package application.logic;
 
 
 import application.GameController;
+import application.input.InputUtility;
 import application.sharedObject.RenderableHolder;
 import utils.RandomSpawn;
 import utils.SceneNav;
@@ -90,6 +91,7 @@ public class GameLogic {
         if (life.getLife() <= 0) {
             GameController.getInstance().getGameLoop().stop();
             RenderableHolder.getInstance().getEntities().clear();
+            InputUtility.clearKeyPressed();
             SceneNav.setFXMLScene("MainMenu");
         }
     }
