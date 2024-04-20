@@ -1,11 +1,13 @@
 package application;
 
 import application.drawing.GameScreen;
+import application.input.InputUtility;
 import application.logic.GameLogic;
 import application.sharedObject.RenderableHolder;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import utils.SceneNav;
 
 public class GameController {
     private static final GameController instance = new GameController();
@@ -13,6 +15,7 @@ public class GameController {
     private GameLogic gameLogic;
     private int soundValue;
     private final AnimationTimer gameLoop;
+    private int level = 1;
 
     private GameController() {
         soundValue = 100;
@@ -31,7 +34,7 @@ public class GameController {
 
     public void initGame() {
         gameScreen = new GameScreen(1000, 800);
-        gameLogic = new GameLogic();
+        gameLogic = new GameLogic(level);
     }
 
     public void start() {
@@ -62,5 +65,12 @@ public class GameController {
 
     public static GameController getInstance() {
         return instance;
+    }
+
+    public void handleQuit() {
+        gameLoop.stop();
+        InputUtility.clear();
+        RenderableHolder.getInstance().getEntities().clear();
+        SceneNav.setFXMLScene("MainMenu");
     }
 }
