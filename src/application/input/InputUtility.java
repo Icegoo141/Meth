@@ -8,13 +8,21 @@ public class InputUtility {
     private static final ArrayList<KeyCode> keyPressed = new ArrayList<>();
 
     public static void setKeyPressed(KeyCode keyCode, boolean pressed) {
-        if(pressed){
-            if(!keyPressed.contains(keyCode)){
+        if (pressed) {
+            if (!keyPressed.contains(keyCode)) {
                 keyPressed.add(keyCode);
             }
-        }else{
+        } else {
             keyPressed.remove(keyCode);
         }
-        System.out.println(keyPressed);
+//        System.out.println(keyPressed);
+    }
+
+    public static boolean getKeyPressed(KeyCode keycode) {
+        return keyPressed.contains(keycode);
+    }
+
+    public static void clear() {
+        keyPressed.clear();
     }
 }

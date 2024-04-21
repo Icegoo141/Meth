@@ -12,9 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scene.SettingWindowController">
-    <ImageView fitHeight="800.0" fitWidth="1000.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../res/mainMenuBackGround.png" />
-    </ImageView>
+    <ImageView fitHeight="800.0" fitWidth="1000.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" fx:id="backgroundImage"/>
     <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0,0,0,0.88);">
         <Slider fx:id="soundSlider" blockIncrement="1.0" layoutX="94.0" layoutY="178.0" majorTickUnit="10.0" minorTickCount="1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="77.0" prefWidth="405.0" value="100.0" />
         <Label layoutX="94.0" layoutY="161.0" prefHeight="25.0" prefWidth="119.0" text="Volume :" textFill="WHITE">
