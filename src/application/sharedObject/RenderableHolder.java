@@ -23,6 +23,7 @@ public class RenderableHolder {
     public static Image mainBGTextSprite;
     public static Image level1BGSprite;
     public static Image level2BGSprite;
+    public static Image lifeSprite;
 
     static {
         loadResources();
@@ -39,6 +40,7 @@ public class RenderableHolder {
         mainBGTextSprite = new Image(ClassLoader.getSystemResource("mainMenuBackGround.png").toString());
         level1BGSprite = new Image(ClassLoader.getSystemResource("Stage1BG.png").toString());
         level2BGSprite = new Image(ClassLoader.getSystemResource("Stage2BG.png").toString());
+        lifeSprite = new Image(ClassLoader.getSystemResource("Life.png").toString());
     }
 
     private RenderableHolder() {

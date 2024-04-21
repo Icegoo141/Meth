@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class GameLogic {
     private int level;
     private Player player;
+    private int lives;
     private final ArrayList<BaseGhost> enemies;
     private Bullet bullet;
     private HUD hud;
@@ -31,6 +32,8 @@ public class GameLogic {
         this.level = level;
 
         startTime = -1;
+
+        lives = 3;
     }
 
     private void addNewEntity(BaseEntity entity) {
@@ -96,13 +99,11 @@ public class GameLogic {
         enemies.forEach(entity -> entity.setHp(0));
         player.x = 400;
         player.y = 400;
-        player.setHp(player.getHp() - 1);
         if (bullet != null) {
             bullet.destroyed = true;
         }
-        if (player.getHp() <= 0) {
-            GameController.getInstance().handleQuit();
-        }
+        lives = lives - 1;
+        if (lives == 0) GameController.getInstance().handleQuit();
     }
 
     public void handleBulletHit(BaseGhost ghost) {
@@ -112,6 +113,10 @@ public class GameLogic {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     public long getCurrTime() {
