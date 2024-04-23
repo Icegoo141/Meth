@@ -91,7 +91,7 @@ public class GameLogic {
         double elapsedTimeSeconds = (l - startTime) / 1_000_000_000.0;
 
         // Calculate remaining time
-        double remainingTime = 5 - elapsedTimeSeconds;
+        double remainingTime = 60 - elapsedTimeSeconds;
         if (remainingTime < 0 ) {
             remainingTime = 0; // Round timer to 0 if time's up
             if( enemies.isEmpty()){
