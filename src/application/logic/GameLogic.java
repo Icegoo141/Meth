@@ -69,7 +69,7 @@ public class GameLogic {
         }
 
         //spawn an enemy every second
-        if (l - prevSpawnTime >= 1e9) {
+        if (l - prevSpawnTime >= 1e9 && hud.getRemainingTime() != 0) {
             BaseGhost enemy = RandomSpawn.spawnGhost(1);
             addNewEntity(enemy);
             prevSpawnTime = l;
@@ -91,10 +91,12 @@ public class GameLogic {
         double elapsedTimeSeconds = (l - startTime) / 1_000_000_000.0;
 
         // Calculate remaining time
-        double remainingTime = 60 - elapsedTimeSeconds;
+        double remainingTime = 5 - elapsedTimeSeconds;
         if (remainingTime < 0 ) {
             remainingTime = 0; // Round timer to 0 if time's up
-            GameController.getInstance().handleQuit(); // Stop the timer when time's up
+            if( enemies.isEmpty()){
+                GameController.getInstance().handleQuit(); // Stop the timer when time's up
+            }
         }
 
         // Update the timer label
