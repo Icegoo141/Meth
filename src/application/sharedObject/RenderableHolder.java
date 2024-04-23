@@ -24,6 +24,7 @@ public class RenderableHolder {
     public static Image level1BGSprite;
     public static Image level2BGSprite;
     public static Image lifeSprite;
+    public static Image ExplosionSprite;
 
     static {
         loadResources();
@@ -41,6 +42,7 @@ public class RenderableHolder {
         level1BGSprite = new Image(ClassLoader.getSystemResource("Stage1BG.png").toString());
         level2BGSprite = new Image(ClassLoader.getSystemResource("Stage2BG.png").toString());
         lifeSprite = new Image(ClassLoader.getSystemResource("Life.png").toString());
+        ExplosionSprite = new Image(ClassLoader.getSystemResource("EnemyExplosion.png").toString()) ;
     }
 
     private RenderableHolder() {

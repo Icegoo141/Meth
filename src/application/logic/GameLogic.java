@@ -11,6 +11,7 @@ public class GameLogic {
     private Player player;
     private int lives;
     private final ArrayList<BaseGhost> enemies;
+    private final ArrayList<Explosion> explosions ;
     private Bullet bullet;
     private HUD hud;
     private long prevSpawnTime;
@@ -25,6 +26,7 @@ public class GameLogic {
         RenderableHolder.getInstance().add(hud);
 
         enemies = new ArrayList<>();
+        explosions = new ArrayList<>();
 
         player = new Player(400, 400);
         addNewEntity(player);
@@ -54,6 +56,10 @@ public class GameLogic {
             }
         }
 
+        for (Explosion explosion : explosions) {
+            explosion.update();
+        }
+
         if (bullet != null) {
             enemies.forEach(entity -> {
                 if (entity.collideWith(bullet) && !bullet.isDestroyed()) handleBulletHit(entity);
@@ -75,12 +81,18 @@ public class GameLogic {
                 enemies.remove(i);
         }
 
+        //remove finished explosion
+        for (int i = explosions.size() - 1; i >= 0; i--) {
+            if (explosions.get(i).isDestroyed())
+                explosions.remove(i);
+        }
+
         // Calculate elapsed time in seconds
         double elapsedTimeSeconds = (l - startTime) / 1_000_000_000.0;
 
         // Calculate remaining time
         double remainingTime = 60 - elapsedTimeSeconds;
-        if (remainingTime < 0) {
+        if (remainingTime < 0 ) {
             remainingTime = 0; // Round timer to 0 if time's up
             GameController.getInstance().handleQuit(); // Stop the timer when time's up
         }
@@ -109,6 +121,11 @@ public class GameLogic {
     public void handleBulletHit(BaseGhost ghost) {
         bullet.destroyed = true;
         ghost.setHp(ghost.getHp() - bullet.getDamage());
+        if (ghost.isDestroyed()) {
+            Explosion explosion = new Explosion(ghost.x,ghost.y) ;
+            explosions.add(explosion) ;
+            RenderableHolder.getInstance().add(explosion);
+        }
     }
 
     public Player getPlayer() {
