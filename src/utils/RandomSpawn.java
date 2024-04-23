@@ -1,5 +1,6 @@
 package utils;
 
+import application.GameController;
 import application.logic.BaseGhost;
 import application.logic.Ghost2;
 import application.logic.Ghost3;
@@ -10,7 +11,7 @@ import java.util.Random;
 public class RandomSpawn {
     private static final Random rand = new Random();
 
-    public static BaseGhost spawnGhost(int level) {
+    public static BaseGhost spawnEnemy(int level) {
         // Fixed spawn positions
         int randPos = rand.nextInt(16);
         double x, y;

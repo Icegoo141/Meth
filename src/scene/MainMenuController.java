@@ -35,6 +35,7 @@ public class MainMenuController {
 
     @FXML
     private void startGame() {
+        GameController.getInstance().setStage(1);
         GameController.getInstance().start();
     }
 

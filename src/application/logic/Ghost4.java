@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Ghost4 extends BaseGhost {
     public Ghost4(double x, double y) {
         super(x, y);
-        this.speed = 1.2;
+        this.speed = 0.2;
         this.hp = 2;
         images=new ArrayList<>();
         images.add(new WritableImage(RenderableHolder.ghost4Sprite.getPixelReader(), 0, 0, 40, 40));
