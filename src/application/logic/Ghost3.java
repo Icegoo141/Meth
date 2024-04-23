@@ -6,15 +6,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 public class Ghost3 extends BaseGhost {
     public Ghost3(double x, double y) {
         super(x, y);
         this.hp = 2;
-    }
-
-    @Override
-    public void draw(GraphicsContext gc) {
-        WritableImage croppedSprite = new WritableImage(RenderableHolder.ghost3Sprite.getPixelReader(), (isChangeSprite ? 0 : 1) * 40, 0, 40, 40);
-        gc.drawImage(croppedSprite, x - 20, y - 20);
+        images=new ArrayList<>();
+        images.add(new WritableImage(RenderableHolder.ghost3Sprite.getPixelReader(), 0, 0, 40, 40));
+        images.add(new WritableImage(RenderableHolder.ghost3Sprite.getPixelReader(), 40, 0, 40, 40));
     }
 }
