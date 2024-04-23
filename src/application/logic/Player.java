@@ -23,7 +23,7 @@ public class Player extends BaseCollidable {
         this.z = 1;
         this.collisionRadius = 20;
 
-        this.speed = 1;
+        this.speed = 1.5;
         this.damage = 1;
         this.hp = 3;
     }

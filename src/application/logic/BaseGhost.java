@@ -7,11 +7,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 public class BaseGhost extends BaseCollidable {
     protected double speed;
     protected int hp;
 
     protected boolean isChangeSprite;
+
+    protected ArrayList<Image> images ;
 
     private long previousChange = 0;
 
@@ -20,15 +24,16 @@ public class BaseGhost extends BaseCollidable {
         this.y = y;
         this.z = 0;
         this.collisionRadius = 20;
-
         this.speed = .5;
         this.hp = 1;
+        images=new ArrayList<>();
+        images.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 0, 0, 40, 40));
+        images.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 40, 0, 40, 40));
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        WritableImage croppedSprite = new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), (isChangeSprite ? 0 : 1) * 40, 0, 40, 40);
-        gc.drawImage(croppedSprite, x - 20, y - 20);
+        gc.drawImage(isChangeSprite?images.get(0):images.get(1), x - 20, y - 20);
     }
 
     public void update() {
