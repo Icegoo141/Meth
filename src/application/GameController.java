@@ -15,7 +15,7 @@ public class GameController {
     private GameLogic gameLogic;
     private int soundValue;
     private final AnimationTimer gameLoop;
-    private int level = 1;
+    private int stage;
 
     private GameController() {
         soundValue = 100;
@@ -34,7 +34,7 @@ public class GameController {
 
     public void initGame() {
         gameScreen = new GameScreen(1000, 800);
-        gameLogic = new GameLogic(level);
+        gameLogic = new GameLogic(stage);
     }
 
     public void start() {
@@ -72,5 +72,9 @@ public class GameController {
         InputUtility.clear();
         RenderableHolder.getInstance().getEntities().clear();
         SceneNav.setFXMLScene("MainMenu");
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
     }
 }
