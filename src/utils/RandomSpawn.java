@@ -1,10 +1,9 @@
 package utils;
 
-import application.GameController;
 import application.logic.BaseGhost;
-import application.logic.Ghost2;
-import application.logic.Ghost3;
-import application.logic.Ghost4;
+import application.logic.Ninja;
+import application.logic.Oni;
+import application.logic.Monk;
 
 import java.util.Random;
 
@@ -31,39 +30,39 @@ public class RandomSpawn {
         }
 
         // Set chances of spawning different types of ghosts based on the level
-        int baseChance, ghost2Chance, ghost3Chance, ghost4Chance;
+        int samuraiChance, ninjaChance, oniChance, monkChance;
         int randSpawn = rand.nextInt(100);
 
         switch (level) {
             case 1:
-                baseChance = 40;
-                ghost2Chance = 30;
-                ghost3Chance = 20;
-                ghost4Chance = 10;
+                samuraiChance = 40;
+                ninjaChance = 30;
+                oniChance = 20;
+                monkChance = 10;
                 break;
             case 2:
-                baseChance = 20;
-                ghost2Chance = 35;
-                ghost3Chance = 30;
-                ghost4Chance = 15;
+                samuraiChance = 0;
+                ninjaChance = 35;
+                oniChance = 30;
+                monkChance = 15;
                 break;
             default:
-                baseChance = 10;
-                ghost2Chance = 30;
-                ghost3Chance = 40;
-                ghost4Chance = 20;
+                samuraiChance = 10;
+                ninjaChance = 30;
+                oniChance = 40;
+                monkChance = 20;
                 break;
         }
 
         // Determine which type of ghost to spawn based on the random chance
-        if (randSpawn < baseChance) {
+        if (randSpawn < samuraiChance) {
             return new BaseGhost(x, y);
-        } else if (randSpawn < baseChance + ghost2Chance) {
-            return new Ghost2(x, y);
-        } else if (randSpawn < baseChance + ghost2Chance + ghost3Chance) {
-            return new Ghost3(x, y);
+        } else if (randSpawn < samuraiChance + ninjaChance) {
+            return new Ninja(x, y);
+        } else if (randSpawn < samuraiChance + ninjaChance + oniChance) {
+            return new Oni(x, y);
         } else {
-            return new Ghost4(x, y);
+            return new Monk(x, y);
         }
     }
 }

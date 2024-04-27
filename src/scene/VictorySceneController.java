@@ -11,7 +11,7 @@ public class VictorySceneController {
     @FXML
     private ImageView victorySceneImage;
     public void initialize(){
-        victorySceneImage.setImage(RenderableHolder.VictoryScene);
+        victorySceneImage.setImage(RenderableHolder.victoryScene);
     }
 
     @FXML

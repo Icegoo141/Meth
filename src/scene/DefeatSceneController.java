@@ -12,7 +12,7 @@ public class DefeatSceneController {
     @FXML
     private ImageView defeatSceneImage;
     public void initialize(){
-        defeatSceneImage.setImage(RenderableHolder.DefeatScene);
+        defeatSceneImage.setImage(RenderableHolder.defeatScene);
     }
 
     @FXML

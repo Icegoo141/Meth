@@ -77,6 +77,7 @@ public class GameLogic {
 
     public void handleShoot(int dirX, int dirY) {
         if (bullet != null) return;
+        RenderableHolder.shootSound.play((double) GameController.getInstance().getSoundValue()/100);
         bullet = new Bullet(player.x + dirX, player.y + dirY, dirX, dirY, player.getDamage());
         addNewEntity(bullet);
     }
@@ -89,14 +90,14 @@ public class GameLogic {
             bullet.destroyed = true;
         }
         lives = lives - 1;
-        if (lives == 0) GameController.getInstance().handleQuit("DefeatScene");
+        if (lives == 0) GameController.getInstance().handleQuit("defeatScene");
     }
 
     private void handleBulletHitEnemy(BaseGhost ghost) {
         bullet.destroyed = true;
         ghost.setHp(ghost.getHp() - bullet.getDamage());
         if (ghost.isDestroyed()) {
-            RenderableHolder.explosionSound.play() ;
+            RenderableHolder.explosionSound.play((double) GameController.getInstance().getSoundValue()/100) ;
             Explosion explosion = new Explosion(ghost.x, ghost.y);
             explosions.add(explosion);
             RenderableHolder.getInstance().add(explosion);
@@ -108,7 +109,7 @@ public class GameLogic {
         if (currTime - prevSpawnTime >= 1e9 && hud.getRemainingTime() != 0) {
             BaseGhost spawnedEnemy = RandomSpawn.spawnEnemy(stage);
             enemies.forEach(enemy-> {
-                if (enemy instanceof Ghost4) spawnedEnemy.setHp(spawnedEnemy.getHp() + 1);
+                if (enemy instanceof Monk) spawnedEnemy.setHp(spawnedEnemy.getHp() + 1);
             });
             addNewEntity(spawnedEnemy);
             prevSpawnTime = currTime;

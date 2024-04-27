@@ -27,8 +27,9 @@ public class RenderableHolder {
     public static Image lifeSprite;
     public static Image explosionSprite;
     public static AudioClip explosionSound ;
-    public static Image VictoryScene ;
-    public static Image DefeatScene ;
+    public static AudioClip shootSound ;
+    public static Image victoryScene ;
+    public static Image defeatScene;
 
 
     static {
@@ -49,9 +50,9 @@ public class RenderableHolder {
         lifeSprite = new Image(ClassLoader.getSystemResource("Life.png").toString());
         explosionSprite = new Image(ClassLoader.getSystemResource("EnemyExplosion.png").toString()) ;
         explosionSound = new AudioClip(ClassLoader.getSystemResource("explosionSound.wav").toString()) ;
-        VictoryScene = new Image(ClassLoader.getSystemResource("Victory.png").toString()) ;
-        DefeatScene = new Image(ClassLoader.getSystemResource("Defeat.png").toString()) ;
-        explosionSound.setVolume(0.1);
+        victoryScene = new Image(ClassLoader.getSystemResource("Victory.png").toString()) ;
+        defeatScene = new Image(ClassLoader.getSystemResource("Defeat.png").toString()) ;
+        shootSound = new AudioClip(ClassLoader.getSystemResource("shootSound.wav").toString()) ;
     }
 
     private RenderableHolder() {
