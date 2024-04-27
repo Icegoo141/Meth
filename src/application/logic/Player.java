@@ -46,10 +46,10 @@ public class Player extends BaseCollidable {
         int dirY = 0;
 
         // Check for directional shooting
-        if (InputUtility.getKeyPressed(KeyCode.UP)) dirY = -1;
-        else if (InputUtility.getKeyPressed(KeyCode.DOWN)) dirY = 1;
-        if (InputUtility.getKeyPressed(KeyCode.LEFT)) dirX = -1;
-        else if (InputUtility.getKeyPressed(KeyCode.RIGHT)) dirX = 1;
+        if (InputUtility.getKeyPressed(KeyCode.UP)) dirY = -2;
+        else if (InputUtility.getKeyPressed(KeyCode.DOWN)) dirY = 2;
+        if (InputUtility.getKeyPressed(KeyCode.LEFT)) dirX = -2;
+        else if (InputUtility.getKeyPressed(KeyCode.RIGHT)) dirX = 2;
 
         // Handle shooting
         if (dirY != 0 || dirX != 0) {

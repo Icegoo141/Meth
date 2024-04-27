@@ -77,7 +77,7 @@ public class GameLogic {
 
     public void handleShoot(int dirX, int dirY) {
         if (bullet != null) return;
-        bullet = new Bullet(player.x + 30 * dirX, player.y + 30 * dirY, dirX, dirY, player.getDamage());
+        bullet = new Bullet(player.x + dirX, player.y + dirY, dirX, dirY, player.getDamage());
         addNewEntity(bullet);
     }
 
@@ -89,13 +89,14 @@ public class GameLogic {
             bullet.destroyed = true;
         }
         lives = lives - 1;
-        if (lives == 0) GameController.getInstance().handleQuit();
+        if (lives == 0) GameController.getInstance().handleQuit("DefeatScene");
     }
 
     private void handleBulletHitEnemy(BaseGhost ghost) {
         bullet.destroyed = true;
         ghost.setHp(ghost.getHp() - bullet.getDamage());
         if (ghost.isDestroyed()) {
+            RenderableHolder.explosionSound.play() ;
             Explosion explosion = new Explosion(ghost.x, ghost.y);
             explosions.add(explosion);
             RenderableHolder.getInstance().add(explosion);
@@ -137,7 +138,7 @@ public class GameLogic {
         if (remainingTime <= 0) {
             remainingTime = 0; // Round timer to 0 if time's up
             if (enemies.isEmpty()) {
-                GameController.getInstance().handleQuit(); // Stop the timer when time's up
+                GameController.getInstance().handleQuit("VictoryScene"); // Stop the timer when time's up
             }
         }
 

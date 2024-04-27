@@ -1,6 +1,7 @@
 package application.sharedObject;
 
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,6 +26,10 @@ public class RenderableHolder {
     public static Image level2BGSprite;
     public static Image lifeSprite;
     public static Image explosionSprite;
+    public static AudioClip explosionSound ;
+    public static Image VictoryScene ;
+    public static Image DefeatScene ;
+
 
     static {
         loadResources();
@@ -43,6 +48,10 @@ public class RenderableHolder {
         level2BGSprite = new Image(ClassLoader.getSystemResource("Stage2BG.png").toString());
         lifeSprite = new Image(ClassLoader.getSystemResource("Life.png").toString());
         explosionSprite = new Image(ClassLoader.getSystemResource("EnemyExplosion.png").toString()) ;
+        explosionSound = new AudioClip(ClassLoader.getSystemResource("explosionSound.wav").toString()) ;
+        VictoryScene = new Image(ClassLoader.getSystemResource("Victory.png").toString()) ;
+        DefeatScene = new Image(ClassLoader.getSystemResource("Defeat.png").toString()) ;
+        explosionSound.setVolume(0.1);
     }
 
     private RenderableHolder() {

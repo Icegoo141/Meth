@@ -67,11 +67,11 @@ public class GameController {
         return instance;
     }
 
-    public void handleQuit() {
+    public void handleQuit(String nav) {
         gameLoop.stop();
         InputUtility.clear();
         RenderableHolder.getInstance().getEntities().clear();
-        SceneNav.setFXMLScene("MainMenu");
+        SceneNav.setFXMLScene(nav);
     }
 
     public void setStage(int stage) {
