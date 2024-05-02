@@ -1,7 +1,6 @@
 package scene;
 
 import application.GameController;
-import application.Main;
 import application.sharedObject.RenderableHolder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,44 +8,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import utils.SceneNav;
 
-public class MainMenuController {
+public class DefeatSceneController {
+    @FXML
+    private ImageView defeatSceneImage;
+    public void initialize(){
+        RenderableHolder.defeatSound.play();
+        defeatSceneImage.setImage(RenderableHolder.defeatScene);
+    }
 
     @FXML
-    private Button start;
-    @FXML
-    private Button credits;
-    @FXML
-    private Button setting;
-    @FXML
-    private Button quit;
-    @FXML
-    private ImageView backgroundImage;
-    public void initialize() {
-        if(!RenderableHolder.mainBGM.isPlaying()){
-            RenderableHolder.mainBGM.setCycleCount(-1);
-            RenderableHolder.mainBGM.play() ;
-        }
-        backgroundImage.setImage(RenderableHolder.mainBGTextSprite);
-    }
-    @FXML
-    private void goToCredit() {
-        SceneNav.setFXMLScene("Credit");
-    }
-    @FXML
-    private void goToSetting() {
-        SceneNav.setFXMLScene("SettingWindow");
+    private void goToMainMenu() {
+        SceneNav.setFXMLScene("MainMenu");
     }
 
     @FXML
     private void startGame() {
-        RenderableHolder.mainBGM.stop();
         GameController.getInstance().setStage(1);
         GameController.getInstance().start();
-    }
-
-    @FXML
-    private void quitGame() {
-        Main.getStage().close();
     }
 
     @FXML

@@ -1,6 +1,9 @@
 package application;
 
+import application.sharedObject.RenderableHolder;
 import javafx.application.Application;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import utils.SceneNav;
 

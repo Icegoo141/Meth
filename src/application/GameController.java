@@ -7,7 +7,10 @@ import application.sharedObject.RenderableHolder;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import utils.SceneNav;
+
+import java.util.ArrayList;
 
 public class GameController {
     private static final GameController instance = new GameController();
@@ -16,6 +19,10 @@ public class GameController {
     private int soundValue;
     private final AnimationTimer gameLoop;
     private int stage;
+
+    public ArrayList<Integer> arrayList ;
+
+    private  AudioClip bgm ;
 
     private GameController() {
         soundValue = 100;
@@ -38,6 +45,7 @@ public class GameController {
     }
 
     public void start() {
+        arrayList = new ArrayList<>() ;
         initGame();
         StackPane root = new StackPane();
         root.getChildren().add(gameScreen);
@@ -53,6 +61,7 @@ public class GameController {
 
     public void setSoundValue(int soundValue) {
         this.soundValue = soundValue;
+        RenderableHolder.getInstance().setSoundVolume();
     }
 
     public GameLogic getGameLogic() {
@@ -67,14 +76,51 @@ public class GameController {
         return instance;
     }
 
-    public void handleQuit() {
+    public void handleQuit(String nav) {
+        RenderableHolder.level1BGM.stop();
+        RenderableHolder.level2BGM.stop();
+        RenderableHolder.level3BGM.stop();
         gameLoop.stop();
         InputUtility.clear();
         RenderableHolder.getInstance().getEntities().clear();
-        SceneNav.setFXMLScene("MainMenu");
+        SceneNav.setFXMLScene(nav);
+    }
+
+    public void changeStage(){
+        if( stage < 3 ){
+            setStage(++stage);
+            getGameLogic().setStartTime(-1);
+        }
+        else {
+            handleQuit("VictoryScene");
+        }
     }
 
     public void setStage(int stage) {
         this.stage = stage;
+        setBGM();
+    }
+
+    public int getStage(){
+        return stage ;
+    }
+
+    public void setBGM(){
+        switch (stage){
+            case 1 :
+                RenderableHolder.level1BGM.setCycleCount(-1);
+                RenderableHolder.level1BGM.play() ;
+                break ;
+            case 2 :
+                RenderableHolder.level1BGM.stop();
+                RenderableHolder.level2BGM.setCycleCount(-1);
+                RenderableHolder.level2BGM.play() ;
+                break ;
+            case 3 :
+                RenderableHolder.level2BGM.stop();
+                RenderableHolder.level3BGM.setCycleCount(-1);
+                RenderableHolder.level3BGM.play() ;
+                break ;
+        }
     }
 }

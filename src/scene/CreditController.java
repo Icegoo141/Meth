@@ -1,5 +1,6 @@
 package scene;
 
+import application.GameController;
 import application.Main;
 import application.sharedObject.RenderableHolder;
 import javafx.fxml.FXML;
