@@ -5,11 +5,10 @@ import application.sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-public class BaseGhost extends BaseCollidable {
+public class Samurai extends BaseCollidable {
     protected double speed;
     protected int hp;
 
@@ -19,12 +18,12 @@ public class BaseGhost extends BaseCollidable {
 
     private long previousChange = 0;
 
-    public BaseGhost(double x, double y) {
+    public Samurai(double x, double y) {
         this.x = x;
         this.y = y;
         this.z = 0;
         this.collisionRadius = 20;
-        this.speed = 0.8;
+        this.speed = 1.2;
         this.hp = 1;
         images = new ArrayList<>();
         images.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 0, 0, 40, 40));
@@ -37,7 +36,7 @@ public class BaseGhost extends BaseCollidable {
     }
 
     public void update() {
-        // Calculate direction vector from BaseGhost to Player
+        // Calculate direction vector from Samurai to Player
         double dx = GameController.getInstance().getGameLogic().getPlayer().x - this.x;
         double dy = GameController.getInstance().getGameLogic().getPlayer().y - this.y;
 

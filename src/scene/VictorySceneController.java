@@ -11,6 +11,7 @@ public class VictorySceneController {
     @FXML
     private ImageView victorySceneImage;
     public void initialize(){
+        RenderableHolder.victorySound.play();
         victorySceneImage.setImage(RenderableHolder.victoryScene);
     }
 

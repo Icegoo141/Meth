@@ -12,7 +12,7 @@
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
             <children>
-                <ImageView fx:id="defeatSceneImage" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: white;">
+                <ImageView fx:id="defeatSceneImage" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" >
                     <VBox.margin>
                         <Insets top="50.0" />
                     </VBox.margin>

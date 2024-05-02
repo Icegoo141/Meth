@@ -22,7 +22,7 @@ public class Player extends BaseCollidable {
         this.z = 1;
         this.collisionRadius = 20;
 
-        this.speed = 1;
+        this.speed = 1.8;
         this.damage = 1;
     }
 
@@ -46,10 +46,10 @@ public class Player extends BaseCollidable {
         int dirY = 0;
 
         // Check for directional shooting
-        if (InputUtility.getKeyPressed(KeyCode.UP)) dirY = -2;
-        else if (InputUtility.getKeyPressed(KeyCode.DOWN)) dirY = 2;
-        if (InputUtility.getKeyPressed(KeyCode.LEFT)) dirX = -2;
-        else if (InputUtility.getKeyPressed(KeyCode.RIGHT)) dirX = 2;
+        if (InputUtility.getKeyPressed(KeyCode.UP)) dirY = -3;
+        else if (InputUtility.getKeyPressed(KeyCode.DOWN)) dirY = 3;
+        if (InputUtility.getKeyPressed(KeyCode.LEFT)) dirX = -3;
+        else if (InputUtility.getKeyPressed(KeyCode.RIGHT)) dirX = 3;
 
         // Handle shooting
         if (dirY != 0 || dirX != 0) {

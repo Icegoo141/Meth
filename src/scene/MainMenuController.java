@@ -22,6 +22,10 @@ public class MainMenuController {
     @FXML
     private ImageView backgroundImage;
     public void initialize() {
+        if(!RenderableHolder.mainBGM.isPlaying()){
+            RenderableHolder.mainBGM.setCycleCount(-1);
+            RenderableHolder.mainBGM.play() ;
+        }
         backgroundImage.setImage(RenderableHolder.mainBGTextSprite);
     }
     @FXML
@@ -35,6 +39,7 @@ public class MainMenuController {
 
     @FXML
     private void startGame() {
+        RenderableHolder.mainBGM.stop();
         GameController.getInstance().setStage(1);
         GameController.getInstance().start();
     }

@@ -5,10 +5,10 @@ import javafx.scene.image.WritableImage;
 
 import java.util.ArrayList;
 
-public class Monk extends BaseGhost {
+public class Monk extends Samurai {
     public Monk(double x, double y) {
         super(x, y);
-        this.speed = 0.2;
+        this.speed = 0.5;
         this.hp = 2;
         images=new ArrayList<>();
         images.add(new WritableImage(RenderableHolder.ghost4Sprite.getPixelReader(), 0, 0, 40, 40));

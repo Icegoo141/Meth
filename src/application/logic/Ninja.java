@@ -6,7 +6,7 @@ import javafx.scene.image.WritableImage;
 import java.util.ArrayList;
 
 
-public class Ninja extends BaseGhost {
+public class Ninja extends Samurai {
     public Ninja(double x, double y) {
         super(x, y);
         this.speed = 1.5;

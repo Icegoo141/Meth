@@ -5,10 +5,10 @@ import javafx.scene.image.WritableImage;
 
 import java.util.ArrayList;
 
-public class Oni extends BaseGhost {
+public class Oni extends Samurai {
     public Oni(double x, double y) {
         super(x, y);
-        this.speed = 0.6;
+        this.speed = 0.8;
         this.hp = 2;
         images=new ArrayList<>();
         images.add(new WritableImage(RenderableHolder.ghost3Sprite.getPixelReader(), 0, 0, 40, 40));

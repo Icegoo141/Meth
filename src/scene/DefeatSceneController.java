@@ -12,6 +12,7 @@ public class DefeatSceneController {
     @FXML
     private ImageView defeatSceneImage;
     public void initialize(){
+        RenderableHolder.defeatSound.play();
         defeatSceneImage.setImage(RenderableHolder.defeatScene);
     }
 

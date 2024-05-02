@@ -30,6 +30,8 @@ public class SettingWindowController {
             int soundValue = t1.intValue();
             soundText.setText(String.valueOf(soundValue));
             gameInstance.setSoundValue(soundValue);
+            RenderableHolder.mainBGM.stop();
+            RenderableHolder.mainBGM.play();
         }));
     }
 

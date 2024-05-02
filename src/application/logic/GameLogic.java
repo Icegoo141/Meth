@@ -10,7 +10,7 @@ public class GameLogic {
     private int stage;
     private Player player;
     private int lives;
-    private final ArrayList<BaseGhost> enemies;
+    private final ArrayList<Samurai> enemies;
     private final ArrayList<Explosion> explosions;
     private Bullet bullet;
     private HUD hud;
@@ -39,7 +39,7 @@ public class GameLogic {
     }
 
     private void addNewEntity(BaseEntity entity) {
-        if (entity instanceof BaseGhost) enemies.add((BaseGhost) entity);
+        if (entity instanceof Samurai) enemies.add((Samurai) entity);
         RenderableHolder.getInstance().add(entity);
     }
 
@@ -50,7 +50,7 @@ public class GameLogic {
 
         player.update();
 
-        for (BaseGhost ghost : enemies) {
+        for (Samurai ghost : enemies) {
             ghost.update();
             if (ghost.collideWith(player)) {
                 handleEnemyHitPlayer();
@@ -93,7 +93,7 @@ public class GameLogic {
         if (lives == 0) GameController.getInstance().handleQuit("defeatScene");
     }
 
-    private void handleBulletHitEnemy(BaseGhost ghost) {
+    private void handleBulletHitEnemy(Samurai ghost) {
         bullet.destroyed = true;
         ghost.setHp(ghost.getHp() - bullet.getDamage());
         if (ghost.isDestroyed()) {
@@ -106,8 +106,8 @@ public class GameLogic {
 
     private void handleSpawnEnemy() {
         // Spawn an enemy every second
-        if (currTime - prevSpawnTime >= 1e9 && hud.getRemainingTime() != 0) {
-            BaseGhost spawnedEnemy = RandomSpawn.spawnEnemy(stage);
+        if (currTime - prevSpawnTime >= 8e8 && hud.getRemainingTime() != 0) {
+            Samurai spawnedEnemy = RandomSpawn.spawnEnemy(stage);
             enemies.forEach(enemy-> {
                 if (enemy instanceof Monk) spawnedEnemy.setHp(spawnedEnemy.getHp() + 1);
             });
@@ -138,8 +138,8 @@ public class GameLogic {
         double remainingTime = 60 - elapsedTimeSeconds;
         if (remainingTime <= 0) {
             remainingTime = 0; // Round timer to 0 if time's up
-            if (enemies.isEmpty()) {
-                GameController.getInstance().handleQuit("VictoryScene"); // Stop the timer when time's up
+            if (enemies.isEmpty() && GameController.getInstance().getGameLogic().getLives() != 0) {
+                GameController.getInstance().changeStage(); // Stop the timer when time's up
             }
         }
 
@@ -157,5 +157,9 @@ public class GameLogic {
 
     public long getCurrTime() {
         return currTime;
+    }
+
+    public void setStartTime(long startTime){
+        this.startTime = startTime ;
     }
 }

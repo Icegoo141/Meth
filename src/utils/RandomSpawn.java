@@ -1,6 +1,7 @@
 package utils;
 
-import application.logic.BaseGhost;
+import application.GameController;
+import application.logic.Samurai;
 import application.logic.Ninja;
 import application.logic.Oni;
 import application.logic.Monk;
@@ -10,7 +11,7 @@ import java.util.Random;
 public class RandomSpawn {
     private static final Random rand = new Random();
 
-    public static BaseGhost spawnEnemy(int level) {
+    public static Samurai spawnEnemy(int level) {
         // Fixed spawn positions
         int randPos = rand.nextInt(16);
         double x, y;
@@ -33,18 +34,24 @@ public class RandomSpawn {
         int samuraiChance, ninjaChance, oniChance, monkChance;
         int randSpawn = rand.nextInt(100);
 
-        switch (level) {
+        switch (GameController.getInstance().getStage()) {
             case 1:
-                samuraiChance = 40;
-                ninjaChance = 30;
-                oniChance = 20;
-                monkChance = 10;
+                samuraiChance = 50;
+                ninjaChance = 35;
+                oniChance = 15;
+                monkChance = 0;
                 break;
             case 2:
+                samuraiChance = 20;
+                ninjaChance = 50;
+                oniChance = 20;
+                monkChance = 5;
+                break;
+            case 3:
                 samuraiChance = 0;
-                ninjaChance = 35;
+                ninjaChance = 60;
                 oniChance = 30;
-                monkChance = 15;
+                monkChance = 10;
                 break;
             default:
                 samuraiChance = 10;
@@ -56,7 +63,7 @@ public class RandomSpawn {
 
         // Determine which type of ghost to spawn based on the random chance
         if (randSpawn < samuraiChance) {
-            return new BaseGhost(x, y);
+            return new Samurai(x, y);
         } else if (randSpawn < samuraiChance + ninjaChance) {
             return new Ninja(x, y);
         } else if (randSpawn < samuraiChance + ninjaChance + oniChance) {
