@@ -90,7 +90,7 @@ public class GameLogic {
             bullet.destroyed = true;
         }
         lives = lives - 1;
-        if (lives == 0) GameController.getInstance().handleQuit("defeatScene");
+        if (lives == 0) GameController.getInstance().handleQuit("DefeatScene");
     }
 
     private void handleBulletHitEnemy(Samurai ghost) {
