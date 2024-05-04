@@ -38,11 +38,11 @@ public class Bullet extends BaseCollidable {
         this.x = this.x + (dirX * speed);
         this.y = this.y + (dirY * speed);
 
-        //out of bound
+        // Handle out of bounds
         if (x < 50 || x > 750) destroyed = true;
         if (y < 50 || y > 750) destroyed = true;
 
-        //update sprite
+        // Update sprite
         long now = GameController.getInstance().getGameLogic().getCurrTime();
         if (now - previousSpriteChange >= 5e7) {
             isAlternateSprite = !isAlternateSprite;

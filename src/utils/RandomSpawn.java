@@ -1,17 +1,17 @@
 package utils;
 
 import application.GameController;
-import application.logic.entities.Samurai;
+import application.logic.entities.Monk;
 import application.logic.entities.Ninja;
 import application.logic.entities.Oni;
-import application.logic.entities.Monk;
+import application.logic.entities.Samurai;
 
 import java.util.Random;
 
 public class RandomSpawn {
     private static final Random rand = new Random();
 
-    public static Samurai spawnEnemy(int level) {
+    public static Samurai spawnEnemy() {
         // Fixed spawn positions
         int randPos = rand.nextInt(16);
         double x, y;

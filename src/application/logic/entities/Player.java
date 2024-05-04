@@ -25,6 +25,18 @@ public class Player extends BaseCollidable {
     }
 
     public void update() {
+        handleMovement();
+        handleShooting();
+
+        // Update sprite
+        long now = GameController.getInstance().getGameLogic().getCurrTime();
+        if (now - previousSpriteChange >= 250000000) {
+            isAlternateSprite = !isAlternateSprite;
+            previousSpriteChange = now;
+        }
+    }
+
+    private void handleMovement() {
         // Movement
         if (InputUtility.getKeyPressed(KeyCode.W)) {
             this.y -= speed;
@@ -39,6 +51,12 @@ public class Player extends BaseCollidable {
             this.x += speed;
         }
 
+        // Handle out of bounds
+        x = Math.min(740, Math.max(60, x));
+        y = Math.min(740, Math.max(60, y));
+    }
+
+    private void handleShooting() {
         // Shooting
         int dirX = 0;
         int dirY = 0;
@@ -52,17 +70,6 @@ public class Player extends BaseCollidable {
         // Handle shooting
         if (dirY != 0 || dirX != 0) {
             GameController.getInstance().getGameLogic().handleShoot(dirX, dirY);
-        }
-
-        // Handle out of bounds
-        x = Math.min(740, Math.max(60, x));
-        y = Math.min(740, Math.max(60, y));
-
-        //Update sprite
-        long now = GameController.getInstance().getGameLogic().getCurrTime();
-        if (now - previousSpriteChange >= 250000000) {
-            isAlternateSprite = !isAlternateSprite;
-            previousSpriteChange = now;
         }
     }
 

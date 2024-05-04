@@ -1,7 +1,6 @@
 package application.logic.entities;
 
 import application.GameController;
-import application.logic.entities.BaseCollidable;
 import application.sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -40,6 +39,17 @@ public class Samurai extends BaseCollidable {
     }
 
     public void update() {
+        handleMovement();
+
+        // Update sprite
+        long now = GameController.getInstance().getGameLogic().getCurrTime();
+        if (now - previousChange >= 250000000) {
+            isChangeSprite = !isChangeSprite;
+            previousChange = now;
+        }
+    }
+
+    private void handleMovement() {
         // Calculate direction vector from Samurai to Player
         double dx = GameController.getInstance().getGameLogic().getPlayer().getX() - this.x;
         double dy = GameController.getInstance().getGameLogic().getPlayer().getY() - this.y;
@@ -60,13 +70,6 @@ public class Samurai extends BaseCollidable {
         // Update position of second entity
         this.x = (this.x + speedX);
         this.y = (this.y + speedY);
-
-        //Update sprite
-        long now = GameController.getInstance().getGameLogic().getCurrTime();
-        if (now - previousChange >= 250000000) {
-            isChangeSprite = !isChangeSprite;
-            previousChange = now;
-        }
     }
 
     public int getHp() {

@@ -7,10 +7,7 @@ import application.sharedObject.RenderableHolder;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.AudioClip;
 import utils.SceneNav;
-
-import java.util.ArrayList;
 
 public class GameController {
     private static final GameController instance = new GameController();
@@ -25,11 +22,11 @@ public class GameController {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                //draw
+                // Draw objects
                 gameScreen.paintComponent();
-                //logic
+                // Logic loop
                 gameLogic.update(l);
-                //objectDeletion
+                // Object deletion
                 RenderableHolder.getInstance().update();
             }
         };
@@ -37,7 +34,7 @@ public class GameController {
 
     public void initGame() {
         gameScreen = new GameScreen(1000, 800);
-        gameLogic = new GameLogic(stage);
+        gameLogic = new GameLogic();
     }
 
     public void start() {

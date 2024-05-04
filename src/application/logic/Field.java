@@ -4,8 +4,6 @@ import application.GameController;
 import application.sharedObject.IRenderable;
 import application.sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 public class Field implements IRenderable {
     @Override

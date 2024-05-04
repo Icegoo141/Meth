@@ -6,37 +6,45 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scene.MainMenuController">
-   <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true" fx:id="backgroundImage"/>
-   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-      <children>
-         <Button fx:id="start" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startGame" onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="70.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Start Game" textAlignment="CENTER" textFill="#4f4286">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+           prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="scene.MainMenuController">
+    <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true" fx:id="backgroundImage"/>
+    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+        <StackPane.margin>
+            <Insets top="200.0"/>
+        </StackPane.margin>
+        <Button fx:id="start" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startGame"
+                onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="70.0" prefWidth="260.0"
+                style="-fx-background-color: transparent;" text="Start Game" textAlignment="CENTER"
+                textFill="#4f4286">
             <font>
-               <Font name="Bell MT Bold" size="37.0" />
+                <Font name="Bell MT Bold" size="37.0"/>
             </font>
             <VBox.margin>
-               <Insets />
+                <Insets/>
             </VBox.margin>
-         </Button>
-         <Button fx:id="setting" maxWidth="-Infinity" mnemonicParsing="false" onAction="#goToSetting" onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="70.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Setting" textAlignment="CENTER" textFill="#4f4286">
+        </Button>
+        <Button fx:id="setting" maxWidth="-Infinity" mnemonicParsing="false" onAction="#goToSetting"
+                onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="70.0" prefWidth="260.0"
+                style="-fx-background-color: transparent;" text="Setting" textAlignment="CENTER" textFill="#4f4286">
             <font>
-               <Font name="Bell MT Bold" size="37.0" />
+                <Font name="Bell MT Bold" size="37.0"/>
             </font>
-         </Button>
-         <Button fx:id="credits" maxWidth="-Infinity" mnemonicParsing="false" onAction="#goToCredit" onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="50.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Credits" textAlignment="CENTER" textFill="#4f4286">
+        </Button>
+        <Button fx:id="credits" maxWidth="-Infinity" mnemonicParsing="false" onAction="#goToCredit"
+                onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="50.0" prefWidth="260.0"
+                style="-fx-background-color: transparent;" text="Credits" textAlignment="CENTER" textFill="#4f4286">
             <font>
-               <Font name="Bell MT Bold" size="37.0" />
+                <Font name="Bell MT Bold" size="37.0"/>
             </font>
-         </Button>
-         <Button fx:id="quit" maxWidth="-Infinity" mnemonicParsing="false" onAction="#quitGame" onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="50.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Quit" textAlignment="CENTER" textFill="#4f4286">
+        </Button>
+        <Button fx:id="quit" maxWidth="-Infinity" mnemonicParsing="false" onAction="#quitGame"
+                onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="50.0" prefWidth="260.0"
+                style="-fx-background-color: transparent;" text="Quit" textAlignment="CENTER" textFill="#4f4286">
             <font>
-               <Font name="Bell MT Bold" size="37.0" />
+                <Font name="Bell MT Bold" size="37.0"/>
             </font>
-         </Button>
-      </children>
-      <StackPane.margin>
-         <Insets top="200.0" />
-      </StackPane.margin>
-   </VBox>
+        </Button>
+    </VBox>
 </StackPane>

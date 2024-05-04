@@ -10,17 +10,17 @@ import javafx.scene.image.WritableImage;
 import java.util.ArrayList;
 
 public class Explosion implements IRenderable {
-    private double x, y;
-    private int changedSprite;
-    private long previousChange;
+    private final double x, y;
+    private int spritePhase;
+    private long previousSpriteChange;
 
     protected ArrayList<Image> images;
 
     public Explosion(double x, double y) {
         this.x = x;
         this.y = y;
-        this.previousChange = GameController.getInstance().getGameLogic().getCurrTime();
-        this.changedSprite = 0;
+        this.previousSpriteChange = GameController.getInstance().getGameLogic().getCurrTime();
+        this.spritePhase = 0;
         images = new ArrayList<>();
         images.add(new WritableImage(RenderableHolder.explosionSprite.getPixelReader(), 0, 0, 40, 40));
         images.add(new WritableImage(RenderableHolder.explosionSprite.getPixelReader(), 40, 0, 40, 40));
@@ -36,20 +36,20 @@ public class Explosion implements IRenderable {
 
     public void update() {
         long now = GameController.getInstance().getGameLogic().getCurrTime();
-        if (now - previousChange >= 12e7) {
-            changedSprite++;
-            previousChange = now;
+        if (now - previousSpriteChange >= 12e7) {
+            spritePhase++;
+            previousSpriteChange = now;
         }
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(images.get(changedSprite), x - 20, y - 20);
+        gc.drawImage(images.get(spritePhase), x - 20, y - 20);
     }
 
     @Override
     public boolean isDestroyed() {
-        return changedSprite >= 5;
+        return spritePhase >= 5;
     }
 
 
