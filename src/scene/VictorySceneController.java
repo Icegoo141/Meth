@@ -10,7 +10,8 @@ import utils.SceneNav;
 public class VictorySceneController {
     @FXML
     private ImageView victorySceneImage;
-    public void initialize(){
+
+    public void initialize() {
         RenderableHolder.victorySound.play();
         victorySceneImage.setImage(RenderableHolder.victoryScene);
     }

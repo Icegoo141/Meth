@@ -10,33 +10,34 @@ import javafx.scene.image.WritableImage;
 import java.util.ArrayList;
 
 public class Explosion implements IRenderable {
-    private double x ,y ;
-    private int changedSprite ;
-    private long previousChange ;
+    private double x, y;
+    private int changedSprite;
+    private long previousChange;
 
-    protected ArrayList<Image> images ;
+    protected ArrayList<Image> images;
 
     public Explosion(double x, double y) {
         this.x = x;
         this.y = y;
         this.previousChange = GameController.getInstance().getGameLogic().getCurrTime();
-        this.changedSprite = 0 ;
-        images=new ArrayList<>();
+        this.changedSprite = 0;
+        images = new ArrayList<>();
         images.add(new WritableImage(RenderableHolder.explosionSprite.getPixelReader(), 0, 0, 40, 40));
         images.add(new WritableImage(RenderableHolder.explosionSprite.getPixelReader(), 40, 0, 40, 40));
         images.add(new WritableImage(RenderableHolder.explosionSprite.getPixelReader(), 80, 0, 40, 40));
         images.add(new WritableImage(RenderableHolder.explosionSprite.getPixelReader(), 120, 0, 40, 40));
         images.add(new WritableImage(RenderableHolder.explosionSprite.getPixelReader(), 160, 0, 40, 40));
     }
+
     @Override
     public int getZ() {
         return 0;
     }
 
-    public void update(){
+    public void update() {
         long now = GameController.getInstance().getGameLogic().getCurrTime();
         if (now - previousChange >= 12e7) {
-            changedSprite++ ;
+            changedSprite++;
             previousChange = now;
         }
     }
@@ -47,8 +48,12 @@ public class Explosion implements IRenderable {
     }
 
     @Override
-    public boolean isDestroyed() { return changedSprite >=5 ;}
+    public boolean isDestroyed() {
+        return changedSprite >= 5;
+    }
 
     @Override
-    public boolean isVisible() {return true;}
+    public boolean isVisible() {
+        return true;
+    }
 }

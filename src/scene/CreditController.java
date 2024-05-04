@@ -18,9 +18,11 @@ public class CreditController {
     private Button toMenu;
     @FXML
     private ImageView backgroundImage;
+
     public void initialize() {
         backgroundImage.setImage(RenderableHolder.mainBGTextSprite);
     }
+
     @FXML
     private void backToMainMenu() {
         SceneNav.setFXMLScene("MainMenu");

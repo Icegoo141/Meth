@@ -28,16 +28,16 @@ public class RenderableHolder {
     public static Image level3BGSprite;
     public static Image lifeSprite;
     public static Image explosionSprite;
-    public static Image victoryScene ;
+    public static Image victoryScene;
     public static Image defeatScene;
-    public static AudioClip explosionSound ;
-    public static AudioClip shootSound ;
-    public static AudioClip victorySound ;
-    public static AudioClip defeatSound ;
-    public static AudioClip level1BGM ;
-    public static AudioClip level2BGM ;
-    public static AudioClip level3BGM ;
-    public static AudioClip mainBGM ;
+    public static AudioClip explosionSound;
+    public static AudioClip shootSound;
+    public static AudioClip victorySound;
+    public static AudioClip defeatSound;
+    public static AudioClip level1BGM;
+    public static AudioClip level2BGM;
+    public static AudioClip level3BGM;
+    public static AudioClip mainBGM;
 
 
     static {
@@ -57,17 +57,17 @@ public class RenderableHolder {
         level2BGSprite = new Image(ClassLoader.getSystemResource("Stage2BG.png").toString());
         level3BGSprite = new Image(ClassLoader.getSystemResource("Stage3BG.png").toString());
         lifeSprite = new Image(ClassLoader.getSystemResource("Life.png").toString());
-        explosionSprite = new Image(ClassLoader.getSystemResource("EnemyExplosion.png").toString()) ;
-        victoryScene = new Image(ClassLoader.getSystemResource("Victory.png").toString()) ;
-        defeatScene = new Image(ClassLoader.getSystemResource("Defeat.png").toString()) ;
-        explosionSound = new AudioClip(ClassLoader.getSystemResource("explosionSound.wav").toString()) ;
-        shootSound = new AudioClip(ClassLoader.getSystemResource("shootSound.wav").toString()) ;
-        victorySound = new AudioClip(ClassLoader.getSystemResource("VictorySound.mp3").toString()) ;
-        defeatSound = new AudioClip(ClassLoader.getSystemResource("DefeatSound.wav").toString()) ;
-        level1BGM = new AudioClip(ClassLoader.getSystemResource("Stage1BGM.mp3").toString()) ;
-        level2BGM = new AudioClip(ClassLoader.getSystemResource("Stage2BGM.mp3").toString()) ;
-        level3BGM = new AudioClip(ClassLoader.getSystemResource("Stage3BGM.mp3").toString()) ;
-        mainBGM = new AudioClip(ClassLoader.getSystemResource("MainMenuBGM.mp3").toString()) ;
+        explosionSprite = new Image(ClassLoader.getSystemResource("EnemyExplosion.png").toString());
+        victoryScene = new Image(ClassLoader.getSystemResource("Victory.png").toString());
+        defeatScene = new Image(ClassLoader.getSystemResource("Defeat.png").toString());
+        explosionSound = new AudioClip(ClassLoader.getSystemResource("explosionSound.wav").toString());
+        shootSound = new AudioClip(ClassLoader.getSystemResource("shootSound.wav").toString());
+        victorySound = new AudioClip(ClassLoader.getSystemResource("VictorySound.mp3").toString());
+        defeatSound = new AudioClip(ClassLoader.getSystemResource("DefeatSound.wav").toString());
+        level1BGM = new AudioClip(ClassLoader.getSystemResource("Stage1BGM.mp3").toString());
+        level2BGM = new AudioClip(ClassLoader.getSystemResource("Stage2BGM.mp3").toString());
+        level3BGM = new AudioClip(ClassLoader.getSystemResource("Stage3BGM.mp3").toString());
+        mainBGM = new AudioClip(ClassLoader.getSystemResource("MainMenuBGM.mp3").toString());
     }
 
     private RenderableHolder() {
@@ -87,8 +87,8 @@ public class RenderableHolder {
         }
     }
 
-    public void setSoundVolume(){
-        double volume = (double) GameController.getInstance().getSoundValue()/100;
+    public void setSoundVolume() {
+        double volume = (double) GameController.getInstance().getSoundValue() / 100;
 
         explosionSound.setVolume(volume);
         shootSound.setVolume(volume);

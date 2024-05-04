@@ -20,9 +20,9 @@ public class GameController {
     private final AnimationTimer gameLoop;
     private int stage;
 
-    public ArrayList<Integer> arrayList ;
+    public ArrayList<Integer> arrayList;
 
-    private  AudioClip bgm ;
+    private AudioClip bgm;
 
     private GameController() {
         soundValue = 100;
@@ -45,7 +45,7 @@ public class GameController {
     }
 
     public void start() {
-        arrayList = new ArrayList<>() ;
+        arrayList = new ArrayList<>();
         initGame();
         StackPane root = new StackPane();
         root.getChildren().add(gameScreen);
@@ -86,12 +86,11 @@ public class GameController {
         SceneNav.setFXMLScene(nav);
     }
 
-    public void changeStage(){
-        if( stage < 3 ){
+    public void changeStage() {
+        if (stage < 3) {
             setStage(++stage);
             getGameLogic().setStartTime(-1);
-        }
-        else {
+        } else {
             handleQuit("VictoryScene");
         }
     }
@@ -101,26 +100,26 @@ public class GameController {
         setBGM();
     }
 
-    public int getStage(){
-        return stage ;
+    public int getStage() {
+        return stage;
     }
 
-    public void setBGM(){
-        switch (stage){
-            case 1 :
+    public void setBGM() {
+        switch (stage) {
+            case 1:
                 RenderableHolder.level1BGM.setCycleCount(-1);
-                RenderableHolder.level1BGM.play() ;
-                break ;
-            case 2 :
+                RenderableHolder.level1BGM.play();
+                break;
+            case 2:
                 RenderableHolder.level1BGM.stop();
                 RenderableHolder.level2BGM.setCycleCount(-1);
-                RenderableHolder.level2BGM.play() ;
-                break ;
-            case 3 :
+                RenderableHolder.level2BGM.play();
+                break;
+            case 3:
                 RenderableHolder.level2BGM.stop();
                 RenderableHolder.level3BGM.setCycleCount(-1);
-                RenderableHolder.level3BGM.play() ;
-                break ;
+                RenderableHolder.level3BGM.play();
+                break;
         }
     }
 }

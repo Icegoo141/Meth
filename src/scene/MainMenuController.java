@@ -21,17 +21,20 @@ public class MainMenuController {
     private Button quit;
     @FXML
     private ImageView backgroundImage;
+
     public void initialize() {
-        if(!RenderableHolder.mainBGM.isPlaying()){
+        if (!RenderableHolder.mainBGM.isPlaying()) {
             RenderableHolder.mainBGM.setCycleCount(-1);
-            RenderableHolder.mainBGM.play() ;
+            RenderableHolder.mainBGM.play();
         }
         backgroundImage.setImage(RenderableHolder.mainBGTextSprite);
     }
+
     @FXML
     private void goToCredit() {
         SceneNav.setFXMLScene("Credit");
     }
+
     @FXML
     private void goToSetting() {
         SceneNav.setFXMLScene("SettingWindow");

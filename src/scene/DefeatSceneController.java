@@ -11,7 +11,8 @@ import utils.SceneNav;
 public class DefeatSceneController {
     @FXML
     private ImageView defeatSceneImage;
-    public void initialize(){
+
+    public void initialize() {
         RenderableHolder.defeatSound.play();
         defeatSceneImage.setImage(RenderableHolder.defeatScene);
     }

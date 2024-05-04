@@ -47,7 +47,7 @@ public class HUD implements IRenderable {
         this.remainingTime = remainingTime;
     }
 
-    public double getRemainingTime(){
-        return remainingTime ;
+    public double getRemainingTime() {
+        return remainingTime;
     }
 }

@@ -22,7 +22,7 @@ public class Field implements IRenderable {
             case 2:
                 gc.drawImage(RenderableHolder.level2BGSprite, 0, 0);
                 break;
-            case 3 :
+            case 3:
                 gc.drawImage(RenderableHolder.level3BGSprite, 0, 0);
                 break;
         }

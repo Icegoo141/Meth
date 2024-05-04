@@ -15,7 +15,7 @@ public class Bullet extends BaseCollidable {
     private int dirY;
     private int damage;
     protected boolean isChangeSprite;
-    protected ArrayList<Image> images ;
+    protected ArrayList<Image> images;
     private long previousChange = 0;
 
     public Bullet(double x, double y, int dirX, int dirY, int damage) {
@@ -25,7 +25,7 @@ public class Bullet extends BaseCollidable {
         this.dirY = dirY;
         this.damage = damage;
         this.collisionRadius = 10;
-        images=new ArrayList<>();
+        images = new ArrayList<>();
         images.add(new WritableImage(RenderableHolder.bulletSprite.getPixelReader(), 0, 0, 20, 20));
         images.add(new WritableImage(RenderableHolder.bulletSprite.getPixelReader(), 20, 0, 20, 20));
     }
@@ -48,7 +48,7 @@ public class Bullet extends BaseCollidable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(isChangeSprite?images.get(0):images.get(1), x - 10, y - 10);
+        gc.drawImage(isChangeSprite ? images.get(0) : images.get(1), x - 10, y - 10);
     }
 
     public int getDamage() {
