@@ -1,10 +1,10 @@
 package utils;
 
 import application.GameController;
-import application.logic.Samurai;
-import application.logic.Ninja;
-import application.logic.Oni;
-import application.logic.Monk;
+import application.logic.entities.Samurai;
+import application.logic.entities.Ninja;
+import application.logic.entities.Oni;
+import application.logic.entities.Monk;
 
 import java.util.Random;
 

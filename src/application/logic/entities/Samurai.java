@@ -1,10 +1,12 @@
-package application.logic;
+package application.logic.entities;
 
 import application.GameController;
+import application.logic.entities.BaseCollidable;
 import application.sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import utils.Stats;
 
 import java.util.ArrayList;
 
@@ -14,31 +16,33 @@ public class Samurai extends BaseCollidable {
 
     protected boolean isChangeSprite;
 
-    protected ArrayList<Image> images;
+    protected ArrayList<Image> sprites;
 
     private long previousChange = 0;
 
     public Samurai(double x, double y) {
         this.x = x;
         this.y = y;
-        this.z = 0;
-        this.collisionRadius = 20;
-        this.speed = 1.2;
-        this.hp = 1;
-        images = new ArrayList<>();
-        images.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 0, 0, 40, 40));
-        images.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 40, 0, 40, 40));
+        this.z = Stats.ENEMIES_Z_INDEX;
+        this.collisionRadius = Stats.ENEMIES_COLRADIUS;
+
+        this.speed = Stats.SAMURAI_SPD;
+        this.hp = Stats.SAMURAI_HP;
+
+        sprites = new ArrayList<>();
+        sprites.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 0, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 40, 0, 40, 40));
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(isChangeSprite ? images.get(0) : images.get(1), x - 20, y - 20);
+        gc.drawImage(isChangeSprite ? sprites.get(0) : sprites.get(1), x - 20, y - 20);
     }
 
     public void update() {
         // Calculate direction vector from Samurai to Player
-        double dx = GameController.getInstance().getGameLogic().getPlayer().x - this.x;
-        double dy = GameController.getInstance().getGameLogic().getPlayer().y - this.y;
+        double dx = GameController.getInstance().getGameLogic().getPlayer().getX() - this.x;
+        double dy = GameController.getInstance().getGameLogic().getPlayer().getY() - this.y;
 
         // Calculate the distance between the two entities
         double distance = Math.sqrt(dx * dx + dy * dy);
@@ -67,6 +71,14 @@ public class Samurai extends BaseCollidable {
 
     public int getHp() {
         return hp;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     public void setHp(int hp) {

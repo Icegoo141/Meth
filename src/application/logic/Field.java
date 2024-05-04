@@ -32,9 +32,4 @@ public class Field implements IRenderable {
     public boolean isDestroyed() {
         return false;
     }
-
-    @Override
-    public boolean isVisible() {
-        return true;
-    }
 }
