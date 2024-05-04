@@ -46,17 +46,17 @@ public class RenderableHolder {
 
     public static void loadResources() {
         bulletSprite = new Image(ClassLoader.getSystemResource("Bullet.png").toString());
-        playerSprite = new Image(ClassLoader.getSystemResource("Player.png").toString());
-        baseGhostSprite = new Image(ClassLoader.getSystemResource("Samurai.png").toString());
-        ghost2Sprite = new Image(ClassLoader.getSystemResource("Ninja.png").toString());
-        ghost3Sprite = new Image(ClassLoader.getSystemResource("Oni.png").toString());
-        ghost4Sprite = new Image(ClassLoader.getSystemResource("Monk.png").toString());
+        playerSprite = new Image(ClassLoader.getSystemResource("Player.PNG").toString());
+        baseGhostSprite = new Image(ClassLoader.getSystemResource("Samurai.PNG").toString());
+        ghost2Sprite = new Image(ClassLoader.getSystemResource("Ninja.PNG").toString());
+        ghost3Sprite = new Image(ClassLoader.getSystemResource("Oni.PNG").toString());
+        ghost4Sprite = new Image(ClassLoader.getSystemResource("Monk.PNG").toString());
         mainBGSprite = new Image(ClassLoader.getSystemResource("backGround.png").toString());
-        mainBGTextSprite = new Image(ClassLoader.getSystemResource("mainMenuBackGround.png").toString());
-        level1BGSprite = new Image(ClassLoader.getSystemResource("Stage1BG.png").toString());
-        level2BGSprite = new Image(ClassLoader.getSystemResource("Stage2BG.png").toString());
+        mainBGTextSprite = new Image(ClassLoader.getSystemResource("mainMenuBackGround.PNG").toString());
+        level1BGSprite = new Image(ClassLoader.getSystemResource("Stage1BG.PNG").toString());
+        level2BGSprite = new Image(ClassLoader.getSystemResource("Stage2BG.PNG").toString());
         level3BGSprite = new Image(ClassLoader.getSystemResource("Stage3BG.png").toString());
-        lifeSprite = new Image(ClassLoader.getSystemResource("Life.png").toString());
+        lifeSprite = new Image(ClassLoader.getSystemResource("Life.PNG").toString());
         explosionSprite = new Image(ClassLoader.getSystemResource("EnemyExplosion.png").toString()) ;
         victoryScene = new Image(ClassLoader.getSystemResource("Victory.png").toString()) ;
         defeatScene = new Image(ClassLoader.getSystemResource("Defeat.png").toString()) ;

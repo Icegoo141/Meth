@@ -15,7 +15,12 @@ public class SceneNav {
             Parent root = loader.load();
             Scene scene = new Scene(root, 1000, 800);
             Main.getStage().setScene(scene);
-        } catch (IOException ignored) {
+        } catch (IOException e) {
+            System.err.println("Error loading FXML file: " + e.getMessage());
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("Main stage is null: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
