@@ -1,6 +1,7 @@
 package application.logic;
 
 import application.GameController;
+import application.logic.entities.*;
 import application.sharedObject.RenderableHolder;
 import utils.RandomSpawn;
 
@@ -77,28 +78,28 @@ public class GameLogic {
 
     public void handleShoot(int dirX, int dirY) {
         if (bullet != null) return;
-        RenderableHolder.shootSound.play((double) GameController.getInstance().getSoundValue()/100);
-        bullet = new Bullet(player.x + dirX, player.y + dirY, dirX, dirY, player.getDamage());
+        RenderableHolder.shootSound.play((double) GameController.getInstance().getSoundValue() / 100);
+        bullet = new Bullet(player.getX() + dirX, player.getY() + dirY, dirX, dirY);
         addNewEntity(bullet);
     }
 
     private void handleEnemyHitPlayer() {
         enemies.forEach(entity -> entity.setHp(0));
-        player.x = 400;
-        player.y = 400;
+        player.setX(400);
+        player.setY(400);
         if (bullet != null) {
-            bullet.destroyed = true;
+            bullet.setDestroyed(true);
         }
         lives = lives - 1;
         if (lives == 0) GameController.getInstance().handleQuit("DefeatScene");
     }
 
     private void handleBulletHitEnemy(Samurai ghost) {
-        bullet.destroyed = true;
+        bullet.setDestroyed(true);
         ghost.setHp(ghost.getHp() - bullet.getDamage());
         if (ghost.isDestroyed()) {
-            RenderableHolder.explosionSound.play((double) GameController.getInstance().getSoundValue()/100) ;
-            Explosion explosion = new Explosion(ghost.x, ghost.y);
+            RenderableHolder.explosionSound.play((double) GameController.getInstance().getSoundValue() / 100);
+            Explosion explosion = new Explosion(ghost.getX(), ghost.getY());
             explosions.add(explosion);
             RenderableHolder.getInstance().add(explosion);
         }
@@ -108,7 +109,7 @@ public class GameLogic {
         // Spawn an enemy every second
         if (currTime - prevSpawnTime >= 8e8 && hud.getRemainingTime() != 0) {
             Samurai spawnedEnemy = RandomSpawn.spawnEnemy(stage);
-            enemies.forEach(enemy-> {
+            enemies.forEach(enemy -> {
                 if (enemy instanceof Monk) spawnedEnemy.setHp(spawnedEnemy.getHp() + 1);
             });
             addNewEntity(spawnedEnemy);
@@ -159,7 +160,7 @@ public class GameLogic {
         return currTime;
     }
 
-    public void setStartTime(long startTime){
-        this.startTime = startTime ;
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 }

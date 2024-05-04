@@ -20,10 +20,6 @@ public class GameController {
     private final AnimationTimer gameLoop;
     private int stage;
 
-    public ArrayList<Integer> arrayList;
-
-    private AudioClip bgm;
-
     private GameController() {
         soundValue = 100;
         gameLoop = new AnimationTimer() {
@@ -45,7 +41,6 @@ public class GameController {
     }
 
     public void start() {
-        arrayList = new ArrayList<>();
         initGame();
         StackPane root = new StackPane();
         root.getChildren().add(gameScreen);
@@ -66,10 +61,6 @@ public class GameController {
 
     public GameLogic getGameLogic() {
         return gameLogic;
-    }
-
-    public AnimationTimer getGameLoop() {
-        return gameLoop;
     }
 
     public static GameController getInstance() {

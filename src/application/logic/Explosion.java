@@ -52,8 +52,5 @@ public class Explosion implements IRenderable {
         return changedSprite >= 5;
     }
 
-    @Override
-    public boolean isVisible() {
-        return true;
-    }
+
 }

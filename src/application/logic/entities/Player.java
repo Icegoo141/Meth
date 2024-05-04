@@ -1,29 +1,27 @@
-package application.logic;
+package application.logic.entities;
 
 import application.GameController;
 import application.input.InputUtility;
 import application.sharedObject.RenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
+import utils.Stats;
 
 
 public class Player extends BaseCollidable {
-    private boolean isChangeSprite;
+    private boolean isAlternateSprite;
 
-    private long previousChange = 0;
-    private double speed;
-    private int damage;
+    private long previousSpriteChange = 0;
+    private final double speed;
 
     public Player(double x, double y) {
         this.x = x;
         this.y = y;
-        this.z = 1;
-        this.collisionRadius = 20;
+        this.z = Stats.PLAYER_Z_INDEX;
+        this.collisionRadius = Stats.PLAYER_COLRADIUS;
 
-        this.speed = 1.8;
-        this.damage = 1;
+        this.speed = Stats.PLAYER_SPD;
     }
 
     public void update() {
@@ -62,19 +60,31 @@ public class Player extends BaseCollidable {
 
         //Update sprite
         long now = GameController.getInstance().getGameLogic().getCurrTime();
-        if (now - previousChange >= 250000000) {
-            isChangeSprite = !isChangeSprite;
-            previousChange = now;
+        if (now - previousSpriteChange >= 250000000) {
+            isAlternateSprite = !isAlternateSprite;
+            previousSpriteChange = now;
         }
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        WritableImage croppedSprite = new WritableImage(RenderableHolder.playerSprite.getPixelReader(), (isChangeSprite ? 0 : 1) * 40, 0, 40, 40);
+        WritableImage croppedSprite = new WritableImage(RenderableHolder.playerSprite.getPixelReader(), (isAlternateSprite ? 0 : 1) * 40, 0, 40, 40);
         gc.drawImage(croppedSprite, x - 20, y - 20);
     }
 
-    public int getDamage() {
-        return damage;
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 }

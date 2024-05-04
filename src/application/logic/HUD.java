@@ -38,10 +38,6 @@ public class HUD implements IRenderable {
         return false;
     }
 
-    @Override
-    public boolean isVisible() {
-        return true;
-    }
 
     public void setRemainingTime(double remainingTime) {
         this.remainingTime = remainingTime;

@@ -18,7 +18,6 @@ import utils.SceneNav;
 public class GameScreen extends Canvas {
     public GameScreen(double width, double height) {
         super(width, height);
-        this.setVisible(true);
         addListener();
     }
 
@@ -39,7 +38,7 @@ public class GameScreen extends Canvas {
         GraphicsContext gc = this.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-            if (entity.isVisible() && !entity.isDestroyed()) {
+            if (!entity.isDestroyed()) {
                 entity.draw(gc);
             }
         }
