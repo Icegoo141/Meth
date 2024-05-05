@@ -1,0 +1,277 @@
+@startuml
+class application.logic.entities.Explosion {
+- int spritePhase
+- long previousSpriteChange
+- ArrayList<Image> sprites
++ <<Create>> Explosion(double,double)
++ int getZ()
++ void update()
++ void draw(GraphicsContext)
++ boolean isDestroyed()
+}
+class scene.VictorySceneController {
+- ImageView victorySceneImage
+- Button start
++ void initialize()
+- void goToMainMenu()
+- void onMouseEnter(javafx.scene.input.MouseEvent)
+- void onMouseExit(javafx.scene.input.MouseEvent)
+}
+class application.drawing.GameScreen {
++ <<Create>> GameScreen(double,double)
++ void addListener()
++ void paintComponent()
+}
+abstract class application.logic.entities.BaseCollidable {
+# double collisionRadius
++ boolean collideWith(BaseCollidable)
+}
+class application.sharedObject.RenderableHolder {
+- {static} RenderableHolder instance
+- ArrayList<IRenderable> entities
+- Comparator<IRenderable> comparator
++ {static} Image bulletSprite
++ {static} Image playerSprite
++ {static} Image samuraiSprite
++ {static} Image ninjaSprite
++ {static} Image oniSprite
++ {static} Image monkSprite
++ {static} Image mainBGTextSprite
++ {static} Image level1BGSprite
++ {static} Image level2BGSprite
++ {static} Image level3BGSprite
++ {static} Image lifeSprite
++ {static} Image explosionSprite
++ {static} Image victoryScene
++ {static} Image defeatScene
++ {static} AudioClip explosionSound
++ {static} AudioClip shootSound
++ {static} AudioClip victorySound
++ {static} AudioClip defeatSound
++ {static} AudioClip level1BGM
++ {static} AudioClip level2BGM
++ {static} AudioClip level3BGM
++ {static} AudioClip mainBGM
+- <<Create>> RenderableHolder()
++ {static} void loadResources()
++ void add(IRenderable)
++ void update()
++ void setSoundVolume()
++ {static} RenderableHolder getInstance()
++ List<IRenderable> getEntities()
+}
+class application.logic.Field {
++ int getZ()
++ void draw(GraphicsContext)
++ boolean isDestroyed()
+}
+class application.logic.GameLogic {
+- Player player
+- int lives
+- ArrayList<BaseEntity> entities
+- Bullet bullet
+- HUD hud
+- long prevSpawnTime
+- long currTime
+- long startTime
++ <<Create>> GameLogic()
+- void addNewEntity(BaseEntity)
++ void update(long)
+- void handlePlayerEnemiesCollision()
+- void handleEnemyHitPlayer()
++ void handleBulletEnemiesCollision()
+- void handleBulletHitEnemy(Samurai)
+- void handleSpawnEnemy()
+- void handleDestroyedEntities()
+- void handleGameTimer()
++ void handleShoot(int,int)
++ Player getPlayer()
++ int getLives()
++ long getCurrTime()
++ void setStartTime(long)
+}
+abstract class application.logic.entities.BaseEntity {
+# double x
+# int z
+# boolean destroyed
+# <<Create>> BaseEntity()
++ int getZ()
++ boolean isDestroyed()
++ {abstract}void update()
+}
+class scene.SettingWindowController {
+- GameController gameInstance
+- Slider soundSlider
+- Text soundText
+- Button toMenuButton
+- ImageView backgroundImage
++ void initialize()
+- void goToMainMenu()
+}
+class application.input.InputUtility {
+- {static} ArrayList<KeyCode> keyPressed
++ {static} void setKeyPressed(KeyCode,boolean)
++ {static} boolean getKeyPressed(KeyCode)
++ {static} void clear()
+}
+class utils.SceneNav {
++ {static} void setFXMLScene(String)
+}
+class application.logic.entities.Monk {
++ <<Create>> Monk(double,double)
+}
+class utils.Stats {
++ {static} double ENEMIES_COLRADIUS
++ {static} double BULLET_COLRADIUS
++ {static} double PLAYER_COLRADIUS
++ {static} int ENEMIES_Z_INDEX
++ {static} int PLAYER_Z_INDEX
++ {static} int BULLET_Z_INDEX
++ {static} int BULLET_DMG
++ {static} int SAMURAI_HP
++ {static} int NINJA_HP
++ {static} int ONI_HP
++ {static} int MONK_HP
++ {static} double SAMURAI_SPD
++ {static} double NINJA_SPD
++ {static} double ONI_SPD
++ {static} double MONK_SPD
++ {static} double BULLET_SPD
++ {static} double PLAYER_SPD
+}
+class scene.CreditController {
+- Button toMenu
+- ImageView backgroundImage
++ void initialize()
+- void backToMainMenu()
+}
+class application.logic.entities.Player {
+- boolean isAlternateSprite
+- long previousSpriteChange
+- double speed
++ <<Create>> Player(double,double)
++ void update()
+- void handleMovement()
+- void handleShooting()
++ void draw(GraphicsContext)
++ double getX()
++ void setX(double)
++ double getY()
++ void setY(double)
+}
+class application.logic.entities.Bullet {
+- int dirX
+- double speed
+- int damage
+- boolean isAlternateSprite
+- ArrayList<Image> sprites
+- long previousSpriteChange
++ <<Create>> Bullet(double,double,int,int)
++ void update()
++ void draw(GraphicsContext)
++ void setDestroyed(boolean)
++ int getDamage()
+}
+class scene.MainMenuController {
+- Button start
+- Button credits
+- Button setting
+- Button quit
+- ImageView backgroundImage
++ void initialize()
+- void goToCredit()
+- void goToSetting()
+- void startGame()
+- void quitGame()
+- void onMouseEnter(javafx.scene.input.MouseEvent)
+- void onMouseExit(javafx.scene.input.MouseEvent)
+}
+class application.logic.HUD {
+- double remainingTime
++ int getZ()
++ void draw(GraphicsContext)
++ boolean isDestroyed()
++ void setRemainingTime(double)
++ double getRemainingTime()
+}
+interface application.sharedObject.IRenderable {
+~ int getZ()
+~ void draw(GraphicsContext)
+~ boolean isDestroyed()
+}
+class application.GameController {
+- {static} GameController instance
+- GameScreen gameScreen
+- GameLogic gameLogic
+- int soundValue
+- AnimationTimer gameLoop
+- int stage
+- <<Create>> GameController()
++ void initGame()
++ void start()
++ int getSoundValue()
++ void setSoundValue(int)
++ GameLogic getGameLogic()
++ {static} GameController getInstance()
++ void handleQuit(String)
++ void changeStage()
++ void setStage(int)
++ int getStage()
++ void setBGM()
+}
+class application.logic.entities.Oni {
++ <<Create>> Oni(double,double)
+}
+class utils.RandomSpawn {
+- {static} Random rand
++ {static} Samurai spawnEnemy()
+}
+class application.Main {
+- {static} Stage stage
++ void start(Stage)
++ {static} void main(String[])
++ {static} Stage getStage()
+}
+class scene.DefeatSceneController {
+- ImageView defeatSceneImage
++ void initialize()
+- void goToMainMenu()
+- void startGame()
+- void onMouseEnter(javafx.scene.input.MouseEvent)
+- void onMouseExit(javafx.scene.input.MouseEvent)
+}
+class application.logic.entities.Ninja {
++ <<Create>> Ninja(double,double)
+}
+class application.logic.entities.Samurai {
+# double speed
+# int hp
+# boolean isAlternateSprite
+# ArrayList<Image> sprites
+- long previousSpriteChange
++ <<Create>> Samurai(double,double)
++ void draw(GraphicsContext)
++ void update()
+- void handleMovement()
++ int getHp()
++ double getX()
++ double getY()
++ void setHp(int)
++ boolean isDestroyed()
+}
+
+
+application.logic.entities.BaseEntity <|-- application.logic.entities.Explosion
+javafx.scene.canvas.Canvas <|-- application.drawing.GameScreen
+application.logic.entities.BaseEntity <|-- application.logic.entities.BaseCollidable
+application.sharedObject.IRenderable <|.. application.logic.Field
+application.sharedObject.IRenderable <|.. application.logic.entities.BaseEntity
+application.logic.entities.Samurai <|-- application.logic.entities.Monk
+application.logic.entities.BaseCollidable <|-- application.logic.entities.Player
+application.logic.entities.BaseCollidable <|-- application.logic.entities.Bullet
+application.sharedObject.IRenderable <|.. application.logic.HUD
+application.logic.entities.Samurai <|-- application.logic.entities.Oni
+javafx.application.Application <|-- application.Main
+application.logic.entities.Samurai <|-- application.logic.entities.Ninja
+application.logic.entities.BaseCollidable <|-- application.logic.entities.Samurai
+@enduml
