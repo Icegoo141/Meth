@@ -14,6 +14,7 @@ public class GameLogic {
     private Bullet bullet;
     private final HUD hud;
     private long prevSpawnTime;
+    private long prevShootTime ;
     private long currTime;
     private long startTime;
 
@@ -147,10 +148,11 @@ public class GameLogic {
     }
 
     public void handleShoot(int dirX, int dirY) {
-        if (bullet != null) return;
+        if (bullet != null || currTime - prevShootTime < 2e8) return;
         RenderableHolder.shootSound.play((double) GameController.getInstance().getSoundValue() / 100);
         bullet = new Bullet(player.getX() + dirX, player.getY() + dirY, dirX, dirY);
         addNewEntity(bullet);
+        prevShootTime = currTime ;
     }
 
     public Player getPlayer() {
