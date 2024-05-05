@@ -44,7 +44,7 @@ public class RandomSpawn {
             case 2:
                 samuraiChance = 20;
                 ninjaChance = 50;
-                oniChance = 20;
+                oniChance = 25;
                 monkChance = 5;
                 break;
             case 3:
