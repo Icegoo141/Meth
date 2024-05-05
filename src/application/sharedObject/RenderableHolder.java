@@ -50,7 +50,7 @@ public class RenderableHolder {
         ninjaSprite = new Image(ClassLoader.getSystemResource("Ninja.png").toString());
         oniSprite = new Image(ClassLoader.getSystemResource("Oni.png").toString());
         monkSprite = new Image(ClassLoader.getSystemResource("Monk.png").toString());
-        mainBGTextSprite = new Image(ClassLoader.getSystemResource("mainMenuBackGround.png").toString());
+        mainBGTextSprite = new Image(ClassLoader.getSystemResource("MainMenuBackGround.png").toString());
         level1BGSprite = new Image(ClassLoader.getSystemResource("Stage1BG.png").toString());
         level2BGSprite = new Image(ClassLoader.getSystemResource("Stage2BG.png").toString());
         level3BGSprite = new Image(ClassLoader.getSystemResource("Stage3BG.png").toString());
@@ -58,8 +58,8 @@ public class RenderableHolder {
         explosionSprite = new Image(ClassLoader.getSystemResource("EnemyExplosion.png").toString());
         victoryScene = new Image(ClassLoader.getSystemResource("Victory.png").toString());
         defeatScene = new Image(ClassLoader.getSystemResource("Defeat.png").toString());
-        explosionSound = new AudioClip(ClassLoader.getSystemResource("explosionSound.wav").toString());
-        shootSound = new AudioClip(ClassLoader.getSystemResource("shootSound.wav").toString());
+        explosionSound = new AudioClip(ClassLoader.getSystemResource("ExplosionSound.wav").toString());
+        shootSound = new AudioClip(ClassLoader.getSystemResource("ShootSound.wav").toString());
         victorySound = new AudioClip(ClassLoader.getSystemResource("VictorySound.mp3").toString());
         defeatSound = new AudioClip(ClassLoader.getSystemResource("DefeatSound.wav").toString());
         level1BGM = new AudioClip(ClassLoader.getSystemResource("Stage1BGM.mp3").toString());
