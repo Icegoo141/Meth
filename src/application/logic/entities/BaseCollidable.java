@@ -1,6 +1,4 @@
-package application.logic;
-
-import application.sharedObject.IRenderable;
+package application.logic.entities;
 
 public abstract class BaseCollidable extends BaseEntity {
     protected double collisionRadius;

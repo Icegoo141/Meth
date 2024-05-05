@@ -1,85 +1,145 @@
 package application.logic;
 
 import application.GameController;
+import application.logic.entities.*;
 import application.sharedObject.RenderableHolder;
 import utils.RandomSpawn;
 
 import java.util.ArrayList;
 
 public class GameLogic {
-    private int level;
-    private Player player;
-    private final ArrayList<BaseGhost> enemies;
+    private final Player player;
+    private int lives;
+    private final ArrayList<BaseEntity> entities;
     private Bullet bullet;
-    private HUD hud;
+    private final HUD hud;
     private long prevSpawnTime;
     private long currTime;
     private long startTime;
 
-    public GameLogic(int level) {
+    public GameLogic() {
         Field bg = new Field();
         RenderableHolder.getInstance().add(bg);
 
         hud = new HUD();
         RenderableHolder.getInstance().add(hud);
 
-        enemies = new ArrayList<>();
+        entities = new ArrayList<>();
 
         player = new Player(400, 400);
         addNewEntity(player);
 
-        this.level = level;
-
         startTime = -1;
+
+        lives = 3;
     }
 
     private void addNewEntity(BaseEntity entity) {
-        if (entity instanceof BaseGhost) enemies.add((BaseGhost) entity);
+        if (!(entity instanceof Player)) entities.add(entity);
         RenderableHolder.getInstance().add(entity);
     }
 
     public void update(long l) {
         currTime = l;
-        if (startTime == -1) startTime = l;
+        if (startTime == -1) startTime = currTime;
 
+        // Logic sequence
         player.update();
-        for (BaseGhost ghost : enemies) {
-            ghost.update();
-            if (ghost.collideWith(player)) {
-                handlePlayerDie();
-                break;
+        entities.forEach(BaseEntity::update);
+        handlePlayerEnemiesCollision();
+        handleBulletEnemiesCollision();
+        handleSpawnEnemy();
+        handleDestroyedEntities();
+        handleGameTimer();
+    }
+
+
+    private void handlePlayerEnemiesCollision() {
+        for (BaseEntity entity : entities) {
+            if (entity instanceof Samurai) {
+                if (((Samurai) entity).collideWith(player)) {
+                    handleEnemyHitPlayer();
+                    return;
+                }
             }
         }
+    }
 
+    private void handleEnemyHitPlayer() {
+        entities.forEach(entity -> {
+            if (entity instanceof Samurai) ((Samurai) entity).setHp(0);
+        });
+        player.setX(400);
+        player.setY(400);
         if (bullet != null) {
-            enemies.forEach(entity -> {
-                if (entity.collideWith(bullet) && !bullet.isDestroyed()) handleBulletHit(entity);
-            });
-            bullet.update();
+            bullet.setDestroyed(true);
+        }
+        lives = lives - 1;
+        if (lives == 0) GameController.getInstance().handleQuit("DefeatScene");
+    }
+
+    public void handleBulletEnemiesCollision() {
+        if (bullet != null) {
+            for (BaseEntity entity : entities) {
+                if (entity instanceof Samurai) {
+                    if (((Samurai) entity).collideWith(bullet) && !bullet.isDestroyed()) {
+                        handleBulletHitEnemy((Samurai) entity);
+                        break;
+                    }
+                }
+            }
             if (bullet.isDestroyed()) bullet = null;
         }
+    }
 
-        //spawn an enemy every second
-        if (l - prevSpawnTime >= 1e9) {
-            BaseGhost enemy = RandomSpawn.spawnGhost(1);
-            addNewEntity(enemy);
-            prevSpawnTime = l;
+
+    private void handleBulletHitEnemy(Samurai ghost) {
+        bullet.setDestroyed(true);
+        ghost.setHp(ghost.getHp() - bullet.getDamage());
+        if (ghost.isDestroyed()) {
+            RenderableHolder.explosionSound.play();
+            Explosion explosion = new Explosion(ghost.getX(), ghost.getY());
+            addNewEntity(explosion);
         }
+    }
 
-        //remove unused enemies
-        for (int i = enemies.size() - 1; i >= 0; i--) {
-            if (enemies.get(i).isDestroyed())
-                enemies.remove(i);
+    private void handleSpawnEnemy() {
+        // Spawn an enemy every 0.8 second
+        if (currTime - prevSpawnTime >= 8e8 && hud.getRemainingTime() != 0) {
+            Samurai spawnedEnemy = RandomSpawn.spawnEnemy();
+            entities.forEach(enemy -> {
+                if (enemy instanceof Monk) spawnedEnemy.setHp(spawnedEnemy.getHp() + 1);
+            });
+            addNewEntity(spawnedEnemy);
+            prevSpawnTime = currTime;
         }
+    }
 
+    private void handleDestroyedEntities() {
+        // Remove destroyed enemies
+        for (int i = entities.size() - 1; i >= 0; i--) {
+            if (entities.get(i).isDestroyed()) entities.remove(i);
+        }
+    }
+
+    private void handleGameTimer() {
         // Calculate elapsed time in seconds
-        double elapsedTimeSeconds = (l - startTime) / 1_000_000_000.0;
+        double elapsedTimeSeconds = (currTime - startTime) / 1_000_000_000.0;
 
         // Calculate remaining time
         double remainingTime = 60 - elapsedTimeSeconds;
-        if (remainingTime < 0) {
+        if (remainingTime <= 0) {
             remainingTime = 0; // Round timer to 0 if time's up
-            GameController.getInstance().handleQuit(); // Stop the timer when time's up
+            boolean enemiesExist = false;
+            for (BaseEntity entity : entities) {
+                if (entity instanceof Samurai) {
+                    enemiesExist = true;
+                    break;
+                }
+            }
+            if (!enemiesExist && GameController.getInstance().getGameLogic().getLives() != 0) {
+                GameController.getInstance().changeStage(); // Stop the timer when time's up
+            }
         }
 
         // Update the timer label
@@ -88,33 +148,24 @@ public class GameLogic {
 
     public void handleShoot(int dirX, int dirY) {
         if (bullet != null) return;
-        bullet = new Bullet(player.x + 30 * dirX, player.y + 30 * dirY, dirX, dirY, player.getDamage());
+        RenderableHolder.shootSound.play((double) GameController.getInstance().getSoundValue() / 100);
+        bullet = new Bullet(player.getX() + dirX, player.getY() + dirY, dirX, dirY);
         addNewEntity(bullet);
-    }
-
-    public void handlePlayerDie() {
-        enemies.forEach(entity -> entity.setHp(0));
-        player.x = 400;
-        player.y = 400;
-        player.setHp(player.getHp() - 1);
-        if (bullet != null) {
-            bullet.destroyed = true;
-        }
-        if (player.getHp() <= 0) {
-            GameController.getInstance().handleQuit();
-        }
-    }
-
-    public void handleBulletHit(BaseGhost ghost) {
-        bullet.destroyed = true;
-        ghost.setHp(ghost.getHp() - bullet.getDamage());
     }
 
     public Player getPlayer() {
         return player;
     }
 
+    public int getLives() {
+        return lives;
+    }
+
     public long getCurrTime() {
         return currTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 }
