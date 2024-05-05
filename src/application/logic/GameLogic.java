@@ -14,7 +14,7 @@ public class GameLogic {
     private Bullet bullet;
     private final HUD hud;
     private long prevSpawnTime;
-    private long prevShootTime ;
+    private long prevShootTime;
     private long currTime;
     private long startTime;
 
@@ -47,23 +47,24 @@ public class GameLogic {
         // Logic sequence
         player.update();
         entities.forEach(BaseEntity::update);
-        handlePlayerEnemiesCollision();
+        boolean playerIsHit = handlePlayerEnemiesCollision();
         handleBulletEnemiesCollision();
+        if (!playerIsHit) handleSpawnEnemy();
         handleDestroyedEntities();
         handleGameTimer();
     }
 
 
-    private void handlePlayerEnemiesCollision() {
+    private boolean handlePlayerEnemiesCollision() {
         for (BaseEntity entity : entities) {
             if (entity instanceof Samurai) {
                 if (((Samurai) entity).collideWith(player)) {
                     handleEnemyHitPlayer();
-                    return;
+                    return true;
                 }
             }
         }
-        handleSpawnEnemy();
+        return false;
     }
 
     private void handleEnemyHitPlayer() {
@@ -152,7 +153,7 @@ public class GameLogic {
         RenderableHolder.shootSound.play((double) GameController.getInstance().getSoundValue() / 100);
         bullet = new Bullet(player.getX() + dirX, player.getY() + dirY, dirX, dirY);
         addNewEntity(bullet);
-        prevShootTime = currTime ;
+        prevShootTime = currTime;
     }
 
     public Player getPlayer() {
