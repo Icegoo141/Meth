@@ -80,7 +80,7 @@ public class GameLogic {
         if (lives == 0) GameController.getInstance().handleQuit("DefeatScene");
     }
 
-    public void handleBulletEnemiesCollision() {
+    private void handleBulletEnemiesCollision() {
         if (bullet != null) {
             for (BaseEntity entity : entities) {
                 if (entity instanceof Samurai) {
