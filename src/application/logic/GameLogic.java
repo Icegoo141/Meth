@@ -49,7 +49,6 @@ public class GameLogic {
         entities.forEach(BaseEntity::update);
         handlePlayerEnemiesCollision();
         handleBulletEnemiesCollision();
-        handleSpawnEnemy();
         handleDestroyedEntities();
         handleGameTimer();
     }
@@ -64,6 +63,7 @@ public class GameLogic {
                 }
             }
         }
+        handleSpawnEnemy();
     }
 
     private void handleEnemyHitPlayer() {
