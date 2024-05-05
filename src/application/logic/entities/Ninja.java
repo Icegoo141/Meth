@@ -14,7 +14,7 @@ public class Ninja extends Samurai {
         this.hp = Stats.NINJA_HP;
 
         sprites = new ArrayList<>();
-        sprites.add(new WritableImage(RenderableHolder.ghost2Sprite.getPixelReader(), 0, 0, 40, 40));
-        sprites.add(new WritableImage(RenderableHolder.ghost2Sprite.getPixelReader(), 40, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.ninjaSprite.getPixelReader(), 0, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.ninjaSprite.getPixelReader(), 40, 0, 40, 40));
     }
 }

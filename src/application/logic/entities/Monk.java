@@ -13,7 +13,7 @@ public class Monk extends Samurai {
         this.hp = Stats.MONK_HP;
 
         sprites = new ArrayList<>();
-        sprites.add(new WritableImage(RenderableHolder.ghost4Sprite.getPixelReader(), 0, 0, 40, 40));
-        sprites.add(new WritableImage(RenderableHolder.ghost4Sprite.getPixelReader(), 40, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.monkSprite.getPixelReader(), 0, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.monkSprite.getPixelReader(), 40, 0, 40, 40));
     }
 }

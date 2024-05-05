@@ -13,11 +13,11 @@ public class Samurai extends BaseCollidable {
     protected double speed;
     protected int hp;
 
-    protected boolean isChangeSprite;
+    protected boolean isAlternateSprite;
 
     protected ArrayList<Image> sprites;
 
-    private long previousChange = 0;
+    private long previousSpriteChange = 0;
 
     public Samurai(double x, double y) {
         this.x = x;
@@ -29,13 +29,13 @@ public class Samurai extends BaseCollidable {
         this.hp = Stats.SAMURAI_HP;
 
         sprites = new ArrayList<>();
-        sprites.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 0, 0, 40, 40));
-        sprites.add(new WritableImage(RenderableHolder.baseGhostSprite.getPixelReader(), 40, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.samuraiSprite.getPixelReader(), 0, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.samuraiSprite.getPixelReader(), 40, 0, 40, 40));
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(isChangeSprite ? sprites.get(0) : sprites.get(1), x - 20, y - 20);
+        gc.drawImage(isAlternateSprite ? sprites.get(0) : sprites.get(1), x - 20, y - 20);
     }
 
     public void update() {
@@ -43,9 +43,9 @@ public class Samurai extends BaseCollidable {
 
         // Update sprite
         long now = GameController.getInstance().getGameLogic().getCurrTime();
-        if (now - previousChange >= 250000000) {
-            isChangeSprite = !isChangeSprite;
-            previousChange = now;
+        if (now - previousSpriteChange >= 250000000) {
+            isAlternateSprite = !isAlternateSprite;
+            previousSpriteChange = now;
         }
     }
 
