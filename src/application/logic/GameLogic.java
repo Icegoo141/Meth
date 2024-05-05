@@ -10,8 +10,7 @@ import java.util.ArrayList;
 public class GameLogic {
     private final Player player;
     private int lives;
-    private final ArrayList<Samurai> enemies;
-    private final ArrayList<Explosion> explosions;
+    private final ArrayList<BaseEntity> entities;
     private Bullet bullet;
     private final HUD hud;
     private long prevSpawnTime;
@@ -25,8 +24,7 @@ public class GameLogic {
         hud = new HUD();
         RenderableHolder.getInstance().add(hud);
 
-        enemies = new ArrayList<>();
-        explosions = new ArrayList<>();
+        entities = new ArrayList<>();
 
         player = new Player(400, 400);
         addNewEntity(player);
@@ -37,7 +35,7 @@ public class GameLogic {
     }
 
     private void addNewEntity(BaseEntity entity) {
-        if (entity instanceof Samurai) enemies.add((Samurai) entity);
+        if (!(entity instanceof Player)) entities.add(entity);
         RenderableHolder.getInstance().add(entity);
     }
 
@@ -47,8 +45,8 @@ public class GameLogic {
 
         // Logic sequence
         player.update();
+        entities.forEach(BaseEntity::update);
         handlePlayerEnemiesCollision();
-        explosions.forEach(Explosion::update);
         handleBulletEnemiesCollision();
         handleSpawnEnemy();
         handleDestroyedEntities();
@@ -57,28 +55,20 @@ public class GameLogic {
 
 
     private void handlePlayerEnemiesCollision() {
-        for (Samurai ghost : enemies) {
-            ghost.update();
-            if (ghost.collideWith(player)) {
-                handleEnemyHitPlayer();
-                return;
+        for (BaseEntity entity : entities) {
+            if (entity instanceof Samurai) {
+                if (((Samurai) entity).collideWith(player)) {
+                    handleEnemyHitPlayer();
+                    return;
+                }
             }
         }
     }
 
-    public void handleBulletEnemiesCollision() {
-        if (bullet != null) {
-            enemies.forEach(enemy -> {
-                if (enemy.collideWith(bullet) && !bullet.isDestroyed()) handleBulletHitEnemy(enemy);
-            });
-            bullet.update();
-            if (bullet.isDestroyed()) bullet = null;
-        }
-    }
-
-
     private void handleEnemyHitPlayer() {
-        enemies.forEach(entity -> entity.setHp(0));
+        entities.forEach(entity -> {
+            if (entity instanceof Samurai) ((Samurai) entity).setHp(0);
+        });
         player.setX(400);
         player.setY(400);
         if (bullet != null) {
@@ -88,22 +78,36 @@ public class GameLogic {
         if (lives == 0) GameController.getInstance().handleQuit("DefeatScene");
     }
 
+    public void handleBulletEnemiesCollision() {
+        if (bullet != null) {
+            for (BaseEntity entity : entities) {
+                if (entity instanceof Samurai) {
+                    if (((Samurai) entity).collideWith(bullet) && !bullet.isDestroyed()) {
+                        handleBulletHitEnemy((Samurai) entity);
+                        break;
+                    }
+                }
+            }
+            if (bullet.isDestroyed()) bullet = null;
+        }
+    }
+
+
     private void handleBulletHitEnemy(Samurai ghost) {
         bullet.setDestroyed(true);
         ghost.setHp(ghost.getHp() - bullet.getDamage());
         if (ghost.isDestroyed()) {
-            RenderableHolder.explosionSound.play((double) GameController.getInstance().getSoundValue() / 100);
+            RenderableHolder.explosionSound.play();
             Explosion explosion = new Explosion(ghost.getX(), ghost.getY());
-            explosions.add(explosion);
-            RenderableHolder.getInstance().add(explosion);
+            addNewEntity(explosion);
         }
     }
 
     private void handleSpawnEnemy() {
-        // Spawn an enemy every second
+        // Spawn an enemy every 0.8 second
         if (currTime - prevSpawnTime >= 8e8 && hud.getRemainingTime() != 0) {
             Samurai spawnedEnemy = RandomSpawn.spawnEnemy();
-            enemies.forEach(enemy -> {
+            entities.forEach(enemy -> {
                 if (enemy instanceof Monk) spawnedEnemy.setHp(spawnedEnemy.getHp() + 1);
             });
             addNewEntity(spawnedEnemy);
@@ -113,13 +117,8 @@ public class GameLogic {
 
     private void handleDestroyedEntities() {
         // Remove destroyed enemies
-        for (int i = enemies.size() - 1; i >= 0; i--) {
-            if (enemies.get(i).isDestroyed()) enemies.remove(i);
-        }
-
-        // Remove destroyed explosion effects
-        for (int i = explosions.size() - 1; i >= 0; i--) {
-            if (explosions.get(i).isDestroyed()) explosions.remove(i);
+        for (int i = entities.size() - 1; i >= 0; i--) {
+            if (entities.get(i).isDestroyed()) entities.remove(i);
         }
     }
 
@@ -131,7 +130,14 @@ public class GameLogic {
         double remainingTime = 60 - elapsedTimeSeconds;
         if (remainingTime <= 0) {
             remainingTime = 0; // Round timer to 0 if time's up
-            if (enemies.isEmpty() && GameController.getInstance().getGameLogic().getLives() != 0) {
+            boolean enemiesExist = false;
+            for (BaseEntity entity : entities) {
+                if (entity instanceof Samurai) {
+                    enemiesExist = true;
+                    break;
+                }
+            }
+            if (!enemiesExist && GameController.getInstance().getGameLogic().getLives() != 0) {
                 GameController.getInstance().changeStage(); // Stop the timer when time's up
             }
         }

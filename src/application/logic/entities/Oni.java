@@ -13,7 +13,7 @@ public class Oni extends Samurai {
         this.hp = Stats.ONI_HP;
 
         sprites = new ArrayList<>();
-        sprites.add(new WritableImage(RenderableHolder.ghost3Sprite.getPixelReader(), 0, 0, 40, 40));
-        sprites.add(new WritableImage(RenderableHolder.ghost3Sprite.getPixelReader(), 40, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.oniSprite.getPixelReader(), 0, 0, 40, 40));
+        sprites.add(new WritableImage(RenderableHolder.oniSprite.getPixelReader(), 40, 0, 40, 40));
     }
 }

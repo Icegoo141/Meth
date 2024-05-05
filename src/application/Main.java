@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         Main.stage = stage;
-        stage.setTitle("Shooting Game");
+        stage.setTitle("Ninja Fury");
         stage.setResizable(false);
         SceneNav.setFXMLScene("MainMenu");
         stage.show();

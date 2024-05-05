@@ -17,10 +17,10 @@ public class RenderableHolder {
 
     public static Image bulletSprite;
     public static Image playerSprite;
-    public static Image baseGhostSprite;
-    public static Image ghost2Sprite;
-    public static Image ghost3Sprite;
-    public static Image ghost4Sprite;
+    public static Image samuraiSprite;
+    public static Image ninjaSprite;
+    public static Image oniSprite;
+    public static Image monkSprite;
     public static Image mainBGTextSprite;
     public static Image level1BGSprite;
     public static Image level2BGSprite;
@@ -46,10 +46,10 @@ public class RenderableHolder {
     public static void loadResources() {
         bulletSprite = new Image(ClassLoader.getSystemResource("Bullet.png").toString());
         playerSprite = new Image(ClassLoader.getSystemResource("Player.png").toString());
-        baseGhostSprite = new Image(ClassLoader.getSystemResource("Samurai.png").toString());
-        ghost2Sprite = new Image(ClassLoader.getSystemResource("Ninja.png").toString());
-        ghost3Sprite = new Image(ClassLoader.getSystemResource("Oni.png").toString());
-        ghost4Sprite = new Image(ClassLoader.getSystemResource("Monk.png").toString());
+        samuraiSprite = new Image(ClassLoader.getSystemResource("Samurai.png").toString());
+        ninjaSprite = new Image(ClassLoader.getSystemResource("Ninja.png").toString());
+        oniSprite = new Image(ClassLoader.getSystemResource("Oni.png").toString());
+        monkSprite = new Image(ClassLoader.getSystemResource("Monk.png").toString());
         mainBGTextSprite = new Image(ClassLoader.getSystemResource("mainMenuBackGround.png").toString());
         level1BGSprite = new Image(ClassLoader.getSystemResource("Stage1BG.png").toString());
         level2BGSprite = new Image(ClassLoader.getSystemResource("Stage2BG.png").toString());

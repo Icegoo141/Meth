@@ -1,4 +1,14 @@
 @startuml
+class application.logic.entities.Explosion {
+- int spritePhase
+- long previousSpriteChange
+- ArrayList<Image> sprites
++ <<Create>> Explosion(double,double)
++ int getZ()
++ void update()
++ void draw(GraphicsContext)
++ boolean isDestroyed()
+}
 class scene.VictorySceneController {
 - ImageView victorySceneImage
 - Button start
@@ -12,17 +22,6 @@ class application.drawing.GameScreen {
 + void addListener()
 + void paintComponent()
 }
-class application.logic.Explosion {
-- double x
-- int spritePhase
-- long previousSpriteChange
-# ArrayList<Image> images
-+ <<Create>> Explosion(double,double)
-+ int getZ()
-+ void update()
-+ void draw(GraphicsContext)
-+ boolean isDestroyed()
-}
 abstract class application.logic.entities.BaseCollidable {
 # double collisionRadius
 + boolean collideWith(BaseCollidable)
@@ -33,10 +32,10 @@ class application.sharedObject.RenderableHolder {
 - Comparator<IRenderable> comparator
 + {static} Image bulletSprite
 + {static} Image playerSprite
-+ {static} Image baseGhostSprite
-+ {static} Image ghost2Sprite
-+ {static} Image ghost3Sprite
-+ {static} Image ghost4Sprite
++ {static} Image samuraiSprite
++ {static} Image ninjaSprite
++ {static} Image oniSprite
++ {static} Image monkSprite
 + {static} Image mainBGTextSprite
 + {static} Image level1BGSprite
 + {static} Image level2BGSprite
@@ -69,8 +68,7 @@ class application.logic.Field {
 class application.logic.GameLogic {
 - Player player
 - int lives
-- ArrayList<Samurai> enemies
-- ArrayList<Explosion> explosions
+- ArrayList<BaseEntity> entities
 - Bullet bullet
 - HUD hud
 - long prevSpawnTime
@@ -80,8 +78,8 @@ class application.logic.GameLogic {
 - void addNewEntity(BaseEntity)
 + void update(long)
 - void handlePlayerEnemiesCollision()
-+ void handleBulletEnemiesCollision()
 - void handleEnemyHitPlayer()
++ void handleBulletEnemiesCollision()
 - void handleBulletHitEnemy(Samurai)
 - void handleSpawnEnemy()
 - void handleDestroyedEntities()
@@ -248,9 +246,9 @@ class application.logic.entities.Ninja {
 class application.logic.entities.Samurai {
 # double speed
 # int hp
-# boolean isChangeSprite
+# boolean isAlternateSprite
 # ArrayList<Image> sprites
-- long previousChange
+- long previousSpriteChange
 + <<Create>> Samurai(double,double)
 + void draw(GraphicsContext)
 + void update()
@@ -263,8 +261,8 @@ class application.logic.entities.Samurai {
 }
 
 
+application.logic.entities.BaseEntity <|-- application.logic.entities.Explosion
 javafx.scene.canvas.Canvas <|-- application.drawing.GameScreen
-application.sharedObject.IRenderable <|.. application.logic.Explosion
 application.logic.entities.BaseEntity <|-- application.logic.entities.BaseCollidable
 application.sharedObject.IRenderable <|.. application.logic.Field
 application.sharedObject.IRenderable <|.. application.logic.entities.BaseEntity
